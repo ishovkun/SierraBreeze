@@ -36,7 +36,7 @@
 #include <QWidget>
 #include <QSharedPointer>
 
-namespace Breeze
+namespace SierraBreeze
 {
 
     //_____________________________________________

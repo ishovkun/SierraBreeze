@@ -30,7 +30,7 @@
 #include <QX11Info>
 #endif
 
-namespace Breeze
+namespace SierraBreeze
 {
 
     //* scoped pointer convenience typedef

@@ -32,7 +32,7 @@
 #include <xcb/xcb.h>
 #endif
 
-namespace Breeze
+namespace SierraBreeze
 {
 
     //* implements size grip for all widgets

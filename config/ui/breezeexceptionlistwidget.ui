@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>BreezeExceptionListWidget</class>
- <widget class="QWidget" name="BreezeExceptionListWidget">
+ <!-- <class>BreezeExceptionListWidget</class> -->
+ <!-- <widget class="QWidget" name="BreezeExceptionListWidget"> -->
+ <class>SierraBreezeExceptionListWidget</class>
+ <widget class="QWidget" name="SierraBreezeExceptionListWidget">
   <property name="geometry">
    <rect>
     <x>0</x>

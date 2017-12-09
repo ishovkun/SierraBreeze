@@ -27,7 +27,7 @@
 
 #include <KLocalizedString>
 
-namespace Breeze
+namespace SierraBreeze
 {
 
     //_______________________________________________

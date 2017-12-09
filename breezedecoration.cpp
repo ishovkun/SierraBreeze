@@ -50,14 +50,15 @@
 #include <cmath>
 
 K_PLUGIN_FACTORY_WITH_JSON(
-    BreezeDecoFactory,
+    // BreezeDecoFactory,
+    BreezeSierraDecoFactory,
     "breeze.json",
-    registerPlugin<Breeze::Decoration>();
-    registerPlugin<Breeze::Button>(QStringLiteral("button"));
-    registerPlugin<Breeze::ConfigWidget>(QStringLiteral("kcmodule"));
+    registerPlugin<SierraBreeze::Decoration>();
+    registerPlugin<SierraBreeze::Button>(QStringLiteral("button"));
+    registerPlugin<SierraBreeze::ConfigWidget>(QStringLiteral("kcmodule"));
 )
 
-namespace Breeze
+namespace SierraBreeze
 {
 
     using KDecoration2::ColorRole;
@@ -383,12 +384,12 @@ namespace Breeze
 
             // spacing
             // m_leftButtons->setSpacing(s->smallSpacing()*Metrics::TitleBar_ButtonSpacing);
-            m_leftButtons->setSpacing(s->smallSpacing()*2*Metrics::TitleBar_ButtonSpacing);
+            m_leftButtons->setSpacing(s->smallSpacing()*Metrics::TitleBar_ButtonSpacing);
             // m_leftButtons->setSpacing(s->largeSpacing()*Metrics::TitleBar_ButtonSpacing);
 
             // padding
             const int vPadding = isTopEdge() ? 0 : s->smallSpacing()*Metrics::TitleBar_TopMargin;
-            const int hPadding = s->smallSpacing()*2.0*Metrics::TitleBar_SideMargin;
+            const int hPadding = s->smallSpacing()*Metrics::TitleBar_SideMargin;
             if( isLeftEdge() )
             {
                 // add offsets on the side buttons, to preserve padding, but satisfy Fitts law
@@ -750,4 +751,5 @@ namespace Breeze
 } // namespace
 
 
+// #include "breezedecoration.moc"
 #include "breezedecoration.moc"

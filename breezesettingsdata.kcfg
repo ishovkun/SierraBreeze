@@ -33,8 +33,8 @@
   <group name="Windeco">
 
     <!-- border size -->
-    <!-- 
-      this one is used only for window specific settings, since the default is globally set by kwin 
+    <!--
+      this one is used only for window specific settings, since the default is globally set by kwin
       the enumeration must be kept in sync with kwin's global settings
     -->
     <entry name="BorderSize" type = "Enum">

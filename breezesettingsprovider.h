@@ -28,7 +28,7 @@
 
 #include <QObject>
 
-namespace Breeze
+namespace SierraBreeze
 {
 
     class SettingsProvider: public QObject

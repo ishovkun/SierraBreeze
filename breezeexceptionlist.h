@@ -32,7 +32,7 @@
 
 #include <KSharedConfig>
 
-namespace Breeze
+namespace SierraBreeze
 {
 
     //! breeze exceptions list

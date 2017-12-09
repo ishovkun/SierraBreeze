@@ -41,7 +41,7 @@
 #include <xcb/xcb.h>
 #endif
 
-namespace Breeze
+namespace SierraBreeze
 {
 
     //_________________________________________________________

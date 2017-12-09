@@ -26,7 +26,7 @@
 #include <QSharedPointer>
 #include <QList>
 
-namespace Breeze
+namespace SierraBreeze
 {
     //* convenience typedefs
     using InternalSettingsPtr = QSharedPointer<InternalSettings>;
@@ -43,8 +43,10 @@ namespace Breeze
         //* titlebar metrics, in units of small spacing
         TitleBar_TopMargin = 2,
         TitleBar_BottomMargin = 2,
-        TitleBar_SideMargin = 2,
-        TitleBar_ButtonSpacing = 2,
+        // TitleBar_SideMargin = 2,
+        // TitleBar_ButtonSpacing = 2,
+        TitleBar_SideMargin = 4,
+        TitleBar_ButtonSpacing = 4,
 
         // shadow dimensions (pixels)
         Shadow_Overlap = 3,

@@ -1,6 +1,6 @@
 {
     "KPlugin": {
-        "Description": "Window decoration using the Breeze visual style for the Plasma Desktop",
+        "Description": "Window decoration using the Sierra Breeze visual style for the Plasma Desktop",
         "Description[ar]": "زخرفة نوافذ تستخدم نمط «نسيم» المرئيّ لسطح مكتب «بلازما»",
         "Description[ca@valencia]": "Decoració de les finestres que usa l'estil visual Brisa per a l'escriptori del Plasma",
         "Description[ca]": "Decoració de les finestres que usa l'estil visual Brisa per a l'escriptori del Plasma",
@@ -37,8 +37,8 @@
         "Description[zh_CN]": "窗口装饰使用等离子桌面微风视觉主题",
         "Description[zh_TW]": "使用 Plasma 桌面 Breeze 視覺樣式的視窗裝飾",
         "EnabledByDefault": true,
-        "Id": "org.kde.breeze",
-        "Name": "Breeze",
+        "Id": "org.kde.sierrabreeze",
+        "Name": "Sierra Breeze",
         "Name[ar]": "نسيم",
         "Name[ca@valencia]": "Brisa",
         "Name[ca]": "Brisa",
@@ -63,6 +63,7 @@
     },
     "org.kde.kdecoration2": {
         "blur": false,
+        "defaultTheme": "Breeze Sierra",
         "kcmodule": true
     }
 }

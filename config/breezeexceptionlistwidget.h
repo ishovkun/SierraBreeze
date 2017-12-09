@@ -29,7 +29,7 @@
 #include "breezeexceptionmodel.h"
 
 //* QDialog used to commit selected files
-namespace Breeze
+namespace SierraBreeze
 {
 
     class ExceptionListWidget: public QWidget
@@ -112,7 +112,8 @@ namespace Breeze
         ExceptionModel m_model;
 
         //* ui
-        Ui_BreezeExceptionListWidget m_ui;
+        // Ui_BreezeExceptionListWidget m_ui;
+        Ui_SierraBreezeExceptionListWidget m_ui;
 
         //* changed state
         bool m_changed = false;

@@ -25,7 +25,7 @@
 
 #include <QPainter>
 
-namespace Breeze
+namespace SierraBreeze
 {
 
     using KDecoration2::ColorRole;
@@ -78,27 +78,27 @@ namespace Breeze
 
                 case DecorationButtonType::Close:
                 b->setVisible( d->client().data()->isCloseable() );
-                QObject::connect(d->client().data(), &KDecoration2::DecoratedClient::closeableChanged, b, &Breeze::Button::setVisible );
+                QObject::connect(d->client().data(), &KDecoration2::DecoratedClient::closeableChanged, b, &SierraBreeze::Button::setVisible );
                 break;
 
                 case DecorationButtonType::Maximize:
                 b->setVisible( d->client().data()->isMaximizeable() );
-                QObject::connect(d->client().data(), &KDecoration2::DecoratedClient::maximizeableChanged, b, &Breeze::Button::setVisible );
+                QObject::connect(d->client().data(), &KDecoration2::DecoratedClient::maximizeableChanged, b, &SierraBreeze::Button::setVisible );
                 break;
 
                 case DecorationButtonType::Minimize:
                 b->setVisible( d->client().data()->isMinimizeable() );
-                QObject::connect(d->client().data(), &KDecoration2::DecoratedClient::minimizeableChanged, b, &Breeze::Button::setVisible );
+                QObject::connect(d->client().data(), &KDecoration2::DecoratedClient::minimizeableChanged, b, &SierraBreeze::Button::setVisible );
                 break;
 
                 case DecorationButtonType::ContextHelp:
                 b->setVisible( d->client().data()->providesContextHelp() );
-                QObject::connect(d->client().data(), &KDecoration2::DecoratedClient::providesContextHelpChanged, b, &Breeze::Button::setVisible );
+                QObject::connect(d->client().data(), &KDecoration2::DecoratedClient::providesContextHelpChanged, b, &SierraBreeze::Button::setVisible );
                 break;
 
                 case DecorationButtonType::Shade:
                 b->setVisible( d->client().data()->isShadeable() );
-                QObject::connect(d->client().data(), &KDecoration2::DecoratedClient::shadeableChanged, b, &Breeze::Button::setVisible );
+                QObject::connect(d->client().data(), &KDecoration2::DecoratedClient::shadeableChanged, b, &SierraBreeze::Button::setVisible );
                 break;
 
                 case DecorationButtonType::Menu:
@@ -191,7 +191,7 @@ namespace Breeze
             auto d = qobject_cast<Decoration*>( decoration() );
             auto c = d->client().data();
 
-            const auto hover_hint_color = QColor(41, 43, 50);
+            const auto hover_hint_color = QColor(41, 43, 50, 200);
             QPen hint_pen(hover_hint_color);
 
             switch( type() )

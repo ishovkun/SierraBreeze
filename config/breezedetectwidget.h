@@ -41,7 +41,7 @@
 
 #include <kwindowsystem.h>
 
-namespace Breeze
+namespace SierraBreeze
 {
 
     class DetectDialog : public QDialog

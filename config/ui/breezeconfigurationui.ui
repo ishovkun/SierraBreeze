@@ -348,7 +348,7 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
-        <widget class="Breeze::ExceptionListWidget" name="exceptions" native="true">
+        <widget class="SierraBreeze::ExceptionListWidget" name="exceptions" native="true">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
            <horstretch>0</horstretch>
@@ -370,7 +370,7 @@
    <header>kcolorbutton.h</header>
   </customwidget>
   <customwidget>
-   <class>Breeze::ExceptionListWidget</class>
+   <class>SierraBreeze::ExceptionListWidget</class>
    <extends>QWidget</extends>
    <header>config/breezeexceptionlistwidget.h</header>
    <container>1</container>

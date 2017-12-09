@@ -27,7 +27,7 @@
 #include "breezeexceptionlist.h"
 
 
-namespace Breeze
+namespace SierraBreeze
 {
 
     //______________________________________________________________

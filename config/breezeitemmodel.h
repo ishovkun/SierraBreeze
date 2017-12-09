@@ -28,7 +28,7 @@
 
 #include <QAbstractItemModel>
 
-namespace Breeze
+namespace SierraBreeze
 {
 
     //* Job model. Stores job information for display in lists

@@ -39,7 +39,7 @@ namespace KDecoration2
     class DecorationButtonGroup;
 }
 
-namespace Breeze
+namespace SierraBreeze
 {
     class SizeGrip;
     class Decoration : public KDecoration2::Decoration

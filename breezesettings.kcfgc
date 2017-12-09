@@ -1,6 +1,6 @@
 File=breezesettingsdata.kcfg
 ClassName=InternalSettings
-NameSpace=Breeze
+NameSpace=SierraBreeze
 Singleton=false
 Mutators=true
 GlobalEnums=true

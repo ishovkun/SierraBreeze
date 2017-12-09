@@ -26,7 +26,7 @@
 
 #include <QTextStream>
 
-namespace Breeze
+namespace SierraBreeze
 {
 
     SettingsProvider *SettingsProvider::s_self = nullptr;

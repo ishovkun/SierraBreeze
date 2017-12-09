@@ -1,10 +1,7 @@
-# Thanks a lot to
-# https://zren.github.io/projects/2017/07/08/patching-breeze-window-decorations.html
-#
 
-project(breeze)
-set(PROJECT_VERSION "5.11.90")
-set(PROJECT_VERSION_MAJOR 5)
+project(breezesierra)
+set(PROJECT_VERSION "0.1")
+set(PROJECT_VERSION_MAJOR 0)
 
 cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
 
@@ -57,18 +54,21 @@ configure_file(config-breeze.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-breeze.h
 
 ################# newt target #################
 ### plugin classes
-set(breezedecoration_SRCS
+# set(breezedecoration_SRCS
+set(sierrabreeze_SRCS
     breezebutton.cpp
     breezedecoration.cpp
     breezeexceptionlist.cpp
     breezesettingsprovider.cpp
     breezesizegrip.cpp)
 
-kconfig_add_kcfg_files(breezedecoration_SRCS breezesettings.kcfgc)
+# kconfig_add_kcfg_files(breezedecoration_SRCS breezesettings.kcfgc)
+kconfig_add_kcfg_files(sierrabreeze_SRCS breezesettings.kcfgc)
 
 ### config classes
 ### they are kept separately because they might move in a separate library in the future
-set(breezedecoration_config_SRCS
+# set(breezedecoration_config_SRCS
+set(sierrabreeze_config_SRCS
     config/breezeconfigwidget.cpp
     config/breezedetectwidget.cpp
     config/breezeexceptiondialog.cpp
@@ -77,22 +77,29 @@ set(breezedecoration_config_SRCS
     config/breezeitemmodel.cpp
 )
 
-set(breezedecoration_config_PART_FORMS
+# set(breezedecoration_config_PART_FORMS
+set(sierrabreeze_config_PART_FORMS
    config/ui/breezeconfigurationui.ui
    config/ui/breezedetectwidget.ui
    config/ui/breezeexceptiondialog.ui
    config/ui/breezeexceptionlistwidget.ui
 )
 
-ki18n_wrap_ui(breezedecoration_config_PART_FORMS_HEADERS ${breezedecoration_config_PART_FORMS})
+# ki18n_wrap_ui(breezedecoration_config_PART_FORMS_HEADERS ${breezedecoration_config_PART_FORMS})
+ki18n_wrap_ui(sierrabreeze_config_PART_FORMS_HEADERS ${sierrabreeze_config_PART_FORMS})
 
 ### build library
-add_library(breezedecoration MODULE
-    ${breezedecoration_SRCS}
-    ${breezedecoration_config_SRCS}
-    ${breezedecoration_config_PART_FORMS_HEADERS})
+# add_library(breezedecoration MODULE
+    # ${breezedecoration_SRCS}
+    # ${breezedecoration_config_SRCS}
+    # ${breezedecoration_config_PART_FORMS_HEADERS})
+add_library(sierrabreeze MODULE
+    ${sierrabreeze_SRCS}
+    ${sierrabreeze_config_SRCS}
+    ${sierrabreeze_config_PART_FORMS_HEADERS})
 
-target_link_libraries(breezedecoration
+# target_link_libraries(breezedecoration
+target_link_libraries(sierrabreeze
     PUBLIC
         Qt5::Core
         Qt5::Gui
@@ -107,12 +114,15 @@ target_link_libraries(breezedecoration
         KF5::WindowSystem)
 
 if(BREEZE_HAVE_X11)
-  target_link_libraries(breezedecoration
+  # target_link_libraries(breezedecoration
+  target_link_libraries(sierrabreeze
     PUBLIC
       Qt5::X11Extras
       XCB::XCB)
 endif()
 
 
-install(TARGETS breezedecoration DESTINATION ${PLUGIN_INSTALL_DIR}/org.kde.kdecoration2)
-install(FILES config/breezedecorationconfig.desktop DESTINATION  ${SERVICES_INSTALL_DIR})
+install(TARGETS sierrabreeze DESTINATION ${PLUGIN_INSTALL_DIR}/org.kde.kdecoration2)
+install(FILES config/sierrabreezeconfig.desktop DESTINATION  ${SERVICES_INSTALL_DIR})
+# install(TARGETS breezedecoration DESTINATION ${PLUGIN_INSTALL_DIR}/org.kde.kdecoration2)
+# install(FILES config/breezedecorationconfig.desktop DESTINATION  ${SERVICES_INSTALL_DIR})

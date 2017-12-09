@@ -31,7 +31,7 @@
 #include <QCheckBox>
 #include <QMap>
 
-namespace Breeze
+namespace SierraBreeze
 {
 
     class DetectDialog;

@@ -32,7 +32,7 @@
 
 #include <algorithm>
 
-namespace Breeze
+namespace SierraBreeze
 {
     //! Job model. Stores job information for display in lists
     template<class T> class ListModel : public ItemModel

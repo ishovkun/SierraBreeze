@@ -32,7 +32,7 @@
 #include <QDBusConnection>
 #include <QDBusMessage>
 
-namespace Breeze
+namespace SierraBreeze
 {
 
     //_________________________________________________________

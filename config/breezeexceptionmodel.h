@@ -29,7 +29,7 @@
 #include "breezesettings.h"
 #include "breeze.h"
 
-namespace Breeze
+namespace SierraBreeze
 {
 
     //* qlistview for object counters
