@@ -409,11 +409,11 @@ namespace SierraBreeze
         {
 
             // spacing
-            m_rightButtons->setSpacing(s->smallSpacing()*2*Metrics::TitleBar_ButtonSpacing);
+            m_rightButtons->setSpacing(s->smallSpacing()*Metrics::TitleBar_ButtonSpacing);
 
             // padding
             const int vPadding = isTopEdge() ? 0 : s->smallSpacing()*Metrics::TitleBar_TopMargin;
-            const int hPadding = s->smallSpacing()*2.0*Metrics::TitleBar_SideMargin;
+            const int hPadding = s->smallSpacing()*Metrics::TitleBar_SideMargin;
             if( isRightEdge() )
             {
 
