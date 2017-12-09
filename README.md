@@ -11,7 +11,7 @@ sudo apt install libkf5config-dev libkdecorations2-dev libqt5x11extras5-dev qtde
 ```
 Then do the following:
 ```
-git clone sierrabreeze
+git clone https://github.com/ishovkun/SierraBreeze
 cd sierrabreeze
 mkdir build
 cd build
