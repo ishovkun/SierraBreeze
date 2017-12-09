@@ -239,9 +239,12 @@ namespace Breeze
                     path1.lineTo(11, 13);
                     path1.lineTo(5, 7);
 
-                    path2.moveTo(13, 4);
-                    path2.lineTo(7, 4);
-                    path2.lineTo(13, 10);
+                    // path2.moveTo(13, 4);
+                    // path2.lineTo(7, 4);
+                    // path2.lineTo(13, 10);
+                    path2.moveTo(13, 5);
+                    path2.lineTo(7, 5);
+                    path2.lineTo(13, 11);
 
 
                     painter->fillPath(path1, QBrush(hover_hint_color));
