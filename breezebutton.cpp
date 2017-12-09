@@ -284,10 +284,6 @@ namespace Breeze
                       painter->drawLine( QPointF( 6, 9 ), QPointF( 12, 9 ) );
                     }
                   painter->setPen( pen );
-                    // painter->drawPolyline( QPolygonF()
-                    //     << QPointF( 4, 7 )
-                    //     << QPointF( 9, 12 )
-                    //     << QPointF( 14, 7 ) );
                     break;
                 }
 
@@ -298,43 +294,15 @@ namespace Breeze
                     button_color = QColor(199, 199, 199);
                   painter->setBrush( button_color );
                   painter->setPen( Qt::NoPen );
-                  // painter->drawEllipse( QRectF( 3, 3, 12, 12 ) );
                   painter->drawEllipse( QRectF( 0, 0, 18, 18 ) );
+                  if ( isHovered() )
+                  {
+                    painter->setBrush(QBrush(hover_hint_color));
+                    painter->drawEllipse( QRectF( 6, 6, 6, 6 ) );
+                  }
                   painter->setPen( pen );
                   painter->setBrush( Qt::NoBrush );
-                    // painter->setPen( Qt::NoPen );
-                    // painter->setBrush( foregroundColor );
-
-                    // if( isChecked())
-                    // {
-
-                    //     // outer ring
-                    //     painter->drawEllipse( QRectF( 3, 3, 12, 12 ) );
-
-                    //     // center dot
-                    //     QColor backgroundColor( this->backgroundColor() );
-                    //     auto d = qobject_cast<Decoration*>( decoration() );
-                    //     if( !backgroundColor.isValid() && d ) backgroundColor = d->titleBarColor();
-
-                    //     if( backgroundColor.isValid() )
-                    //     {
-                    //         painter->setBrush( backgroundColor );
-                    //         painter->drawEllipse( QRectF( 8, 8, 2, 2 ) );
-                    //     }
-
-                    // } else {
-
-                    //     painter->drawPolygon( QPolygonF()
-                    //         << QPointF( 6.5, 8.5 )
-                    //         << QPointF( 12, 3 )
-                    //         << QPointF( 15, 6 )
-                    //         << QPointF( 9.5, 11.5 ) );
-
-                    //     painter->setPen( pen );
-                    //     painter->drawLine( QPointF( 5.5, 7.5 ), QPointF( 10.5, 12.5 ) );
-                    //     painter->drawLine( QPointF( 12, 6 ), QPointF( 4.5, 13.5 ) );
-                    // }
-                    break;
+                  break;
                 }
 
                 case DecorationButtonType::Shade:
@@ -385,10 +353,19 @@ namespace Breeze
                     button_color = QColor(199, 199, 199);
                   painter->setBrush( button_color );
                   painter->setPen( Qt::NoPen );
-                  // painter->drawEllipse( QRectF( 3, 3, 12, 12 ) );
                   painter->drawEllipse( QRectF( 0, 0, 18, 18 ) );
-                  painter->setPen( pen );
                   painter->setBrush( Qt::NoBrush );
+                  if ( isHovered() )
+                  {
+
+                    painter->setPen( hint_pen );
+                    QPainterPath path;
+                    path.moveTo(9, 6);
+                    path.lineTo(5, 12);
+                    path.lineTo(13, 12);
+                    painter->fillPath(path, QBrush(hover_hint_color));
+                  }
+                  painter->setPen( pen );
                     // painter->drawPolyline( QPolygonF()
                     //     << QPointF( 4, 9 )
                     //     << QPointF( 9, 4 )
