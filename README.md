@@ -1,3 +1,8 @@
+Special thanks to:
+- Chris Holland for his blog post
+https://zren.github.io/projects/2017/07/08/patching-breeze-window-decorations.html
+
+- The author of Breezemite Andrey Orst
 
 Compile with
 '''
