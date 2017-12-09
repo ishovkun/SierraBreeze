@@ -25,7 +25,7 @@ kwin_x11 --replace &
 That is it! Your new decoration theme should appear in
 Settings->Application Style->Window Decorations.
 
-Acknowledgments:
+## Acknowledgments:
 - The authors of Breeze window decorations Martin Gräßlin and Hugo Pereira Da Costa
 - Andrey Orst, the author of Breezemite Aurorae window decoration
 https://github.com/andreyorst/Breezemite
