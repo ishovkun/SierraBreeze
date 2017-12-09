@@ -1,6 +1,7 @@
 /*
  * Copyright 2014  Martin Gräßlin <mgraesslin@kde.org>
  * Copyright 2014  Hugo Pereira Da Costa <hugo.pereira@free.fr>
+ * Copyright 2017  Igor Shovkun <igshov@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License as
