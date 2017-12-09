@@ -20,9 +20,10 @@ sudo make install
 ```
 In order to avoid logging out, issue
 ```
-kwin_x11 --replace & disown
+kwin_x11 --replace &
 ```
-That is it!
+That is it! Your new decoration theme should appear in
+Settings->Application Style->Window Decorations.
 
 Acknowledgments:
 - The authors of Breeze window decorations Martin Gräßlin and Hugo Pereira Da Costa
