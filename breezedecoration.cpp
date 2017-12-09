@@ -382,11 +382,13 @@ namespace Breeze
         {
 
             // spacing
-            m_leftButtons->setSpacing(s->smallSpacing()*Metrics::TitleBar_ButtonSpacing);
+            // m_leftButtons->setSpacing(s->smallSpacing()*Metrics::TitleBar_ButtonSpacing);
+            m_leftButtons->setSpacing(s->smallSpacing()*2*Metrics::TitleBar_ButtonSpacing);
+            // m_leftButtons->setSpacing(s->largeSpacing()*Metrics::TitleBar_ButtonSpacing);
 
             // padding
             const int vPadding = isTopEdge() ? 0 : s->smallSpacing()*Metrics::TitleBar_TopMargin;
-            const int hPadding = s->smallSpacing()*Metrics::TitleBar_SideMargin;
+            const int hPadding = s->smallSpacing()*2.0*Metrics::TitleBar_SideMargin;
             if( isLeftEdge() )
             {
                 // add offsets on the side buttons, to preserve padding, but satisfy Fitts law
@@ -406,11 +408,11 @@ namespace Breeze
         {
 
             // spacing
-            m_rightButtons->setSpacing(s->smallSpacing()*Metrics::TitleBar_ButtonSpacing);
+            m_rightButtons->setSpacing(s->smallSpacing()*2*Metrics::TitleBar_ButtonSpacing);
 
             // padding
             const int vPadding = isTopEdge() ? 0 : s->smallSpacing()*Metrics::TitleBar_TopMargin;
-            const int hPadding = s->smallSpacing()*Metrics::TitleBar_SideMargin;
+            const int hPadding = s->smallSpacing()*2.0*Metrics::TitleBar_SideMargin;
             if( isRightEdge() )
             {
 
@@ -551,12 +553,18 @@ namespace Breeze
         const int baseSize = settings()->gridUnit();
         switch( m_internalSettings->buttonSize() )
         {
-            case InternalSettings::ButtonTiny: return baseSize;
-            case InternalSettings::ButtonSmall: return baseSize*1.5;
-            default:
-            case InternalSettings::ButtonDefault: return baseSize*2;
-            case InternalSettings::ButtonLarge: return baseSize*2.5;
-            case InternalSettings::ButtonVeryLarge: return baseSize*3.5;
+          case InternalSettings::ButtonTiny: return baseSize/2;
+          case InternalSettings::ButtonSmall: return baseSize;
+          default:
+          case InternalSettings::ButtonDefault: return baseSize*1.5;
+          case InternalSettings::ButtonLarge: return baseSize*2.0;
+          case InternalSettings::ButtonVeryLarge: return baseSize*2.5;
+            // case InternalSettings::ButtonTiny: return baseSize;
+            // case InternalSettings::ButtonSmall: return baseSize*1.5;
+            // default:
+            // case InternalSettings::ButtonDefault: return baseSize*2;
+            // case InternalSettings::ButtonLarge: return baseSize*2.5;
+            // case InternalSettings::ButtonVeryLarge: return baseSize*3.5;
         }
 
     }
