@@ -308,18 +308,26 @@ namespace SierraBreeze
 
                 case DecorationButtonType::Shade:
                 {
-
+                  QColor button_color = QColor(135, 206, 249);
+                  if (!c->isActive())
+                    button_color = QColor(199, 199, 199);
+                  painter->setBrush( button_color );
+                  painter->setPen( Qt::NoPen );
+                  painter->setBrush( button_color );
+                  painter->drawEllipse( QRectF( 0, 0, 18, 18 ) );
+                  painter->setBrush( Qt::NoBrush );
                     if (isChecked())
                     {
-
+                        painter->setPen( hint_pen );
                         painter->drawLine( 4, 5, 14, 5 );
                         painter->drawPolyline( QPolygonF()
                             << QPointF( 4, 8 )
                             << QPointF( 9, 13 )
                             << QPointF( 14, 8 ) );
 
-                    } else {
-
+                    }
+                    else if (isHovered()) {
+                        painter->setPen( hint_pen );
                         painter->drawLine( 4, 5, 14, 5 );
                         painter->drawPolyline( QPolygonF()
                             << QPointF( 4, 13 )
