@@ -296,7 +296,7 @@ namespace SierraBreeze
                   painter->setBrush( button_color );
                   painter->setPen( Qt::NoPen );
                   painter->drawEllipse( QRectF( 0, 0, 18, 18 ) );
-                  if ( isHovered() )
+                  if ( isHovered() || isChecked() )
                   {
                     painter->setBrush(QBrush(hover_hint_color));
                     painter->drawEllipse( QRectF( 6, 6, 6, 6 ) );
@@ -341,16 +341,28 @@ namespace SierraBreeze
 
                 case DecorationButtonType::KeepBelow:
                 {
+                  QColor button_color = QColor(255, 137, 241);
+                  if (!c->isActive())
+                    button_color = QColor(199, 199, 199);
+                  painter->setBrush( button_color );
+                  painter->setPen( Qt::NoPen );
+                  painter->setBrush( button_color );
+                  painter->drawEllipse( QRectF( 0, 0, 18, 18 ) );
+                  painter->setBrush( Qt::NoBrush );
+                  if (isChecked() || isHovered())
+                  {
+                    painter->setPen( hint_pen );
+                    painter->drawPolyline( QPolygonF()
+                                           << QPointF( 4, 5 )
+                                           << QPointF( 9, 10 )
+                                           << QPointF( 14, 5 ) );
 
                     painter->drawPolyline( QPolygonF()
-                        << QPointF( 4, 5 )
-                        << QPointF( 9, 10 )
-                        << QPointF( 14, 5 ) );
+                                           << QPointF( 4, 9 )
+                                           << QPointF( 9, 14 )
+                                           << QPointF( 14, 9 ) );
+                  }
 
-                    painter->drawPolyline( QPolygonF()
-                        << QPointF( 4, 9 )
-                        << QPointF( 9, 14 )
-                        << QPointF( 14, 9 ) );
                     break;
 
                 }
@@ -364,7 +376,7 @@ namespace SierraBreeze
                   painter->setPen( Qt::NoPen );
                   painter->drawEllipse( QRectF( 0, 0, 18, 18 ) );
                   painter->setBrush( Qt::NoBrush );
-                  if ( isHovered() )
+                  if ( isHovered() || isChecked())
                   {
 
                     painter->setPen( hint_pen );
