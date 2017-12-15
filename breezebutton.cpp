@@ -194,6 +194,9 @@ namespace SierraBreeze
 
             const auto hover_hint_color = QColor(41, 43, 50, 200);
             QPen hint_pen(hover_hint_color);
+            hint_pen.setCapStyle( Qt::RoundCap );
+            hint_pen.setJoinStyle( Qt::MiterJoin );
+            hint_pen.setWidthF( 1.1*qMax((qreal)1.0, 20/width ) );
 
             switch( type() )
             {
@@ -205,12 +208,12 @@ namespace SierraBreeze
                     button_color = QColor(199, 199, 199);
                   painter->setBrush( button_color );
                   painter->setPen( Qt::NoPen );
-                  // painter->drawEllipse( QRectF( 3, 3, 12, 12 ) );
                   painter->drawEllipse( QRectF( 0, 0, 18, 18 ) );
                   painter->setBrush( Qt::NoBrush );
                   if ( isHovered() )
                   {
                     painter->setPen( hint_pen );
+                    // painter->setPen(pen);
                     // it's a cross
                     painter->drawLine( QPointF( 6, 6 ), QPointF( 12, 12 ) );
                     painter->drawLine( QPointF( 6, 12 ), QPointF( 12, 6 ) );
