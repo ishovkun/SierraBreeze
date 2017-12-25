@@ -16,10 +16,6 @@ sudo apt install libkf5config-dev libkdecorations2-dev libqt5x11extras5-dev qtde
 sudo pacman -S kdecoration qt5-declarative qt5-x11extras    # Decoration
 sudo pacman -S cmake extra-cmake-modules                    # Installation
 ```
-SierraBreeze can also be installed from the [AUR](https://aur.archlinux.org/packages/sierrabreeze-kwin-decoration-git/) using
-``` shell
-yaourt errabreeze-kwin-decoration-git
-```
 
 ## Installation
 In order to install the theme and add it to your decorations do the following:
@@ -37,6 +33,20 @@ kwin_x11 --replace &
 ```
 That is it! Your new decoration theme should appear in
 *Settings &rarr; Application Style &rarr; Window Decorations*.
+
+### Arch Linux
+SierraBreeze can also be installed from the [AUR](https://aur.archlinux.org/packages/sierrabreeze-kwin-decoration-git/) using
+``` shell
+yaourt sierrabreeze-kwin-decoration-git
+```
+
+### OpenSUSE
+``` shell
+zypper addrepo https://download.opensuse.org/repositories/home:trmdi/openSUSE_Tumbleweed/home:trmdi.repo
+zypper refresh
+zypper install sierra-breeze
+```
+Binary package: https://software.opensuse.org//download.html?project=home%3Atrmdi&package=sierra-breeze.
 
 ## Acknowledgments:
 - The authors of Breeze window decorations Martin Gräßlin and Hugo Pereira Da Costa
