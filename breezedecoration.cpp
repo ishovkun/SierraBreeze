@@ -522,6 +522,14 @@ namespace SierraBreeze
                 Metrics::Frame_FrameRadius),
                 Metrics::Frame_FrameRadius, Metrics::Frame_FrameRadius);
 
+            // painter->drawRoundedRect(titleRect.adjusted(
+            //   isLeftEdge() ? -Metrics::Frame_FrameRadius:0,
+            //   isTopEdge() ? -Metrics::Frame_FrameRadius:0,
+            //   isBottomEdge() ? Metrics::Frame_FrameRadius:0,
+            //   Metrics::Frame_FrameRadius),
+            //   Metrics::Frame_FrameRadius, Metrics::Frame_FrameRadius);
+
+
         }
 
         const QColor outlineColor( this->outlineColor() );
@@ -554,12 +562,12 @@ namespace SierraBreeze
         const int baseSize = settings()->gridUnit();
         switch( m_internalSettings->buttonSize() )
         {
-          case InternalSettings::ButtonTiny: return baseSize/2;
-          case InternalSettings::ButtonSmall: return baseSize;
+          case InternalSettings::ButtonTiny: return baseSize;
+          case InternalSettings::ButtonSmall: return baseSize*1.25;
           default:
           case InternalSettings::ButtonDefault: return baseSize*1.5;
-          case InternalSettings::ButtonLarge: return baseSize*2.0;
-          case InternalSettings::ButtonVeryLarge: return baseSize*2.5;
+          case InternalSettings::ButtonLarge: return baseSize*1.75;
+          case InternalSettings::ButtonVeryLarge: return baseSize*2.0;
             // case InternalSettings::ButtonTiny: return baseSize;
             // case InternalSettings::ButtonSmall: return baseSize*1.5;
             // default:
