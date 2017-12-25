@@ -16,7 +16,7 @@ sudo apt install libkf5config-dev libkdecorations2-dev libqt5x11extras5-dev qtde
 sudo pacman -S kdecoration qt5-declarative qt5-x11extras    # Decoration
 sudo pacman -S cmake extra-cmake-modules                    # Installation
 ```
-SierraBreeze can also be installed from the (AUR)[https://aur.archlinux.org/packages/sierrabreeze-kwin-decoration-git/] using
+SierraBreeze can also be installed from the [AUR](https://aur.archlinux.org/packages/sierrabreeze-kwin-decoration-git/) using
 ``` shell
 yaourt errabreeze-kwin-decoration-git
 ```
