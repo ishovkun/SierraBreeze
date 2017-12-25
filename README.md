@@ -1,7 +1,6 @@
 # SierraBreeze
 Sierra Breeze is a fork of Breeze Window decoration that aims to mimic the
-OSX Sierra titlebar buttons. 
-It looks something like this:
+OSX Sierra titlebar buttons.
 ![Screenshot](Screenshot.png)
 
 ## Dependencies
@@ -41,12 +40,13 @@ yaourt sierrabreeze-kwin-decoration-git
 ```
 
 ### OpenSUSE
+SierraBreeze can also be installed with zypper
 ``` shell
 zypper addrepo https://download.opensuse.org/repositories/home:trmdi/openSUSE_Tumbleweed/home:trmdi.repo
 zypper refresh
 zypper install sierra-breeze
 ```
-Binary package: https://software.opensuse.org//download.html?project=home%3Atrmdi&package=sierra-breeze.
+or using the binary package https://software.opensuse.org//download.html?project=home%3Atrmdi&package=sierra-breeze.
 
 ## Acknowledgments:
 - The authors of Breeze window decorations Martin Gräßlin and Hugo Pereira Da Costa
