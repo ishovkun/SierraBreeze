@@ -56,6 +56,7 @@ namespace SierraBreeze
 
         connect( m_ui.buttonSize, SIGNAL(valueChanged(int)), SLOT(updateChanged()) );
         connect( m_ui.buttonSpacing, SIGNAL(valueChanged(int)), SLOT(updateChanged()) );
+        connect( m_ui.buttonHPadding, SIGNAL(valueChanged(int)), SLOT(updateChanged()) );
 
 
         // track animations changes
@@ -92,6 +93,7 @@ namespace SierraBreeze
         m_ui.drawTitleBarSeparator->setChecked( m_internalSettings->drawTitleBarSeparator() );
         m_ui.buttonSize->setValue( m_internalSettings->buttonSize() );
         m_ui.buttonSpacing->setValue( m_internalSettings->buttonSpacing() );
+        m_ui.buttonHPadding->setValue( m_internalSettings->buttonHPadding() );
 
         // load shadows
         m_ui.shadowSize->setValue( m_internalSettings->shadowSize() );
@@ -127,7 +129,7 @@ namespace SierraBreeze
 
         m_internalSettings->setButtonSize( m_ui.buttonSize->value() );
         m_internalSettings->setButtonSpacing( m_ui.buttonSpacing->value() );
-
+        m_internalSettings->setButtonHPadding( m_ui.buttonHPadding->value() );
 
         m_internalSettings->setShadowSize( m_ui.shadowSize->value() );
         m_internalSettings->setShadowStrength( qRound( qreal(m_ui.shadowStrength->value()*255)/100 ) );
@@ -178,6 +180,7 @@ namespace SierraBreeze
 
         m_ui.buttonSize->setValue( m_internalSettings->buttonSize() );
         m_ui.buttonSpacing->setValue( m_internalSettings->buttonSpacing() );
+        m_ui.buttonHPadding->setValue( m_internalSettings->buttonHPadding() );
 
         m_ui.shadowSize->setValue( m_internalSettings->shadowSize() );
         m_ui.shadowStrength->setValue( qRound(qreal(m_internalSettings->shadowStrength()*100)/255 ) );
@@ -204,6 +207,7 @@ namespace SierraBreeze
         else if( m_ui.drawBackgroundGradient->isChecked() !=  m_internalSettings->drawBackgroundGradient() ) modified = true;
         else if ( m_ui.buttonSize->value() != m_internalSettings->buttonSize() ) modified = true;
         else if ( m_ui.buttonSpacing->value() != m_internalSettings->buttonSpacing() ) modified = true;
+        else if ( m_ui.buttonHPadding->value() != m_internalSettings->buttonHPadding() ) modified = true;
 
         // animations
         else if( m_ui.animationsEnabled->isChecked() !=  m_internalSettings->animationsEnabled() ) modified = true;

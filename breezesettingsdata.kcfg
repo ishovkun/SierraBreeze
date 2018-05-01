@@ -83,6 +83,10 @@
        <default>6</default>
     </entry>
 
+    <entry name="ButtonHPadding" type = "Int">
+       <default>5</default>
+    </entry>
+
     <!-- maximized windows -->
     <entry name="DrawBorderOnMaximizedWindows" type = "Bool">
         <default>false</default>
