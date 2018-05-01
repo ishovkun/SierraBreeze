@@ -384,7 +384,8 @@ namespace SierraBreeze
 
             // spacing
             // m_leftButtons->setSpacing(s->smallSpacing()*Metrics::TitleBar_ButtonSpacing);
-            m_leftButtons->setSpacing(s->smallSpacing()*Metrics::TitleBar_ButtonSpacing);
+            // m_leftButtons->setSpacing(s->smallSpacing()*Metrics::TitleBar_ButtonSpacing);
+            m_leftButtons->setSpacing(m_internalSettings->buttonSpacing());
             // m_leftButtons->setSpacing(s->largeSpacing()*Metrics::TitleBar_ButtonSpacing);
 
             // padding
@@ -409,7 +410,8 @@ namespace SierraBreeze
         {
 
             // spacing
-            m_rightButtons->setSpacing(s->smallSpacing()*Metrics::TitleBar_ButtonSpacing);
+            // m_rightButtons->setSpacing(s->smallSpacing()*Metrics::TitleBar_ButtonSpacing);
+            m_rightButtons->setSpacing(m_internalSettings->buttonSpacing());
 
             // padding
             const int vPadding = isTopEdge() ? 0 : s->smallSpacing()*Metrics::TitleBar_TopMargin;

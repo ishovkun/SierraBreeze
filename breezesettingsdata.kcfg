@@ -75,6 +75,14 @@
       <default>ButtonDefault</default>
     </entry>
 
+    <entry name="ButtonRadius" type = "Int">
+       <default>15</default>
+    </entry>
+
+    <entry name="ButtonSpacing" type = "Int">
+       <default>15</default>
+    </entry>
+
     <!-- maximized windows -->
     <entry name="DrawBorderOnMaximizedWindows" type = "Bool">
         <default>false</default>

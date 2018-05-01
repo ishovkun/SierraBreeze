@@ -54,6 +54,10 @@ namespace SierraBreeze
         connect( m_ui.drawBackgroundGradient, SIGNAL(clicked()), SLOT(updateChanged()) );
         connect( m_ui.drawTitleBarSeparator, SIGNAL(clicked()), SLOT(updateChanged()) );
 
+        connect( m_ui.buttonRadius, SIGNAL(valueChanged(int)), SLOT(updateChanged()) );
+        connect( m_ui.buttonSpacing, SIGNAL(valueChanged(int)), SLOT(updateChanged()) );
+
+
         // track animations changes
         connect( m_ui.animationsEnabled, SIGNAL(clicked()), SLOT(updateChanged()) );
         connect( m_ui.animationsDuration, SIGNAL(valueChanged(int)), SLOT(updateChanged()) );
@@ -86,6 +90,8 @@ namespace SierraBreeze
         m_ui.animationsEnabled->setChecked( m_internalSettings->animationsEnabled() );
         m_ui.animationsDuration->setValue( m_internalSettings->animationsDuration() );
         m_ui.drawTitleBarSeparator->setChecked( m_internalSettings->drawTitleBarSeparator() );
+        m_ui.buttonRadius->setValue( m_internalSettings->buttonRadius() );
+        m_ui.buttonSpacing->setValue( m_internalSettings->buttonSpacing() );
 
         // load shadows
         m_ui.shadowSize->setValue( m_internalSettings->shadowSize() );
@@ -118,6 +124,10 @@ namespace SierraBreeze
         m_internalSettings->setAnimationsEnabled( m_ui.animationsEnabled->isChecked() );
         m_internalSettings->setAnimationsDuration( m_ui.animationsDuration->value() );
         m_internalSettings->setDrawTitleBarSeparator(m_ui.drawTitleBarSeparator->isChecked());
+
+        m_internalSettings->setButtonRadius( m_ui.buttonRadius->value() );
+        m_internalSettings->setButtonSpacing( m_ui.buttonSpacing->value() );
+
 
         m_internalSettings->setShadowSize( m_ui.shadowSize->value() );
         m_internalSettings->setShadowStrength( qRound( qreal(m_ui.shadowStrength->value()*255)/100 ) );
@@ -166,6 +176,9 @@ namespace SierraBreeze
         m_ui.animationsDuration->setValue( m_internalSettings->animationsDuration() );
         m_ui.drawTitleBarSeparator->setChecked( m_internalSettings->drawTitleBarSeparator() );
 
+        m_ui.buttonRadius->setValue( m_internalSettings->buttonRadius() );
+        m_ui.buttonSpacing->setValue( m_internalSettings->buttonSpacing() );
+
         m_ui.shadowSize->setValue( m_internalSettings->shadowSize() );
         m_ui.shadowStrength->setValue( qRound(qreal(m_internalSettings->shadowStrength()*100)/255 ) );
         m_ui.shadowColor->setColor( m_internalSettings->shadowColor() );
@@ -189,6 +202,8 @@ namespace SierraBreeze
         else if( m_ui.drawBorderOnMaximizedWindows->isChecked() !=  m_internalSettings->drawBorderOnMaximizedWindows() ) modified = true;
         else if( m_ui.drawSizeGrip->isChecked() !=  m_internalSettings->drawSizeGrip() ) modified = true;
         else if( m_ui.drawBackgroundGradient->isChecked() !=  m_internalSettings->drawBackgroundGradient() ) modified = true;
+        else if ( m_ui.buttonRadius->value() != m_internalSettings->buttonRadius() ) modified = true;
+        else if ( m_ui.buttonSpacing->value() != m_internalSettings->buttonSpacing() ) modified = true;
 
         // animations
         else if( m_ui.animationsEnabled->isChecked() !=  m_internalSettings->animationsEnabled() ) modified = true;

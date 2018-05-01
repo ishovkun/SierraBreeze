@@ -88,6 +88,55 @@
          </item>
         </widget>
        </item>
+       <item row="7" column="0">
+        <widget class="QLabel" name="buttonRadiusLabel">
+         <property name="text">
+          <string>Button radius:</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="1">
+        <widget class="QSpinBox" name="buttonRadius">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="suffix">
+          <string> px</string>
+         </property>
+         <property name="maximum">
+          <number>15</number>
+         </property>
+        </widget>
+         </item>
+       <item row="8" column="0">
+        <widget class="QLabel" name="buttonSpacingLabel">
+         <property name="text">
+          <string>Button spacing:</string>
+         </property>
+				 <property name="alignment">
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property> -->
+         <property name="buddy">
+          <cstring>buttonSpacing</cstring>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="1">
+        <widget class="QSpinBox" name="buttonSpacing">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="suffix">
+          <string> px</string>
+         </property>
+         <property name="maximum">
+          <number>15</number>
+         </property>
+        </widget>
+         </item>
        <!-- <item row="7" column="0"> -->
        <!--  <widget class="QLabel" name="buttonPixelSizeLabel"> -->
        <!--   <property name="enabled"> -->
@@ -409,6 +458,8 @@
   <tabstop>tabWidget</tabstop>
   <tabstop>titleAlignment</tabstop>
   <tabstop>buttonSize</tabstop>
+  <tabstop>buttonRadius</tabstop>
+  <tabstop>buttonSpacing</tabstop>
   <tabstop>outlineCloseButton</tabstop>
   <tabstop>drawBorderOnMaximizedWindows</tabstop>
   <tabstop>drawBackgroundGradient</tabstop>
