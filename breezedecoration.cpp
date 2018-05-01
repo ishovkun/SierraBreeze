@@ -562,7 +562,8 @@ namespace SierraBreeze
     int Decoration::buttonHeight() const
     {
         const int baseSize = settings()->gridUnit();
-        const int modifier = m_internalSettings->buttonRadius();
+        // const int modifier = m_internalSettings->buttonRadius();
+        const int modifier = m_internalSettings->buttonSize();
         return baseSize + modifier;
     }
 

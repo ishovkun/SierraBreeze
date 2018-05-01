@@ -64,23 +64,23 @@
     </entry>
 
     <!-- button size -->
-    <entry name="ButtonSize" type="Enum">
-      <choices>
-          <choice name="ButtonTiny" />
-          <choice name="ButtonSmall" />
-          <choice name="ButtonDefault" />
-          <choice name="ButtonLarge" />
-          <choice name="ButtonVeryLarge" />
-      </choices>
-      <default>ButtonDefault</default>
-    </entry>
+    <!-- <entry name="ButtonSize" type="Enum"> -->
+    <!--   <choices> -->
+    <!--       <choice name="ButtonTiny" /> -->
+    <!--       <choice name="ButtonSmall" /> -->
+    <!--       <choice name="ButtonDefault" /> -->
+    <!--       <choice name="ButtonLarge" /> -->
+    <!--       <choice name="ButtonVeryLarge" /> -->
+    <!--   </choices> -->
+    <!--   <default>ButtonDefault</default> -->
+    <!-- </entry> -->
 
-    <entry name="ButtonRadius" type = "Int">
-       <default>15</default>
+    <entry name="ButtonSize" type = "Int">
+       <default>5</default>
     </entry>
 
     <entry name="ButtonSpacing" type = "Int">
-       <default>15</default>
+       <default>6</default>
     </entry>
 
     <!-- maximized windows -->
