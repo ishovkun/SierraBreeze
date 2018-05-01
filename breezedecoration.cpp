@@ -564,22 +564,6 @@ namespace SierraBreeze
         const int baseSize = settings()->gridUnit();
         const int modifier = m_internalSettings->buttonRadius();
         return baseSize + modifier;
-        // switch( m_internalSettings->buttonSize() )
-        // {
-        //   case InternalSettings::ButtonTiny: return baseSize;
-        //   case InternalSettings::ButtonSmall: return baseSize*1.25;
-        //   default:
-        //   case InternalSettings::ButtonDefault: return baseSize*1.5;
-        //   case InternalSettings::ButtonLarge: return baseSize*1.75;
-        //   case InternalSettings::ButtonVeryLarge: return baseSize*2.0;
-        //     // case InternalSettings::ButtonTiny: return baseSize;
-        //     // case InternalSettings::ButtonSmall: return baseSize*1.5;
-        //     // default:
-        //     // case InternalSettings::ButtonDefault: return baseSize*2;
-        //     // case InternalSettings::ButtonLarge: return baseSize*2.5;
-        //     // case InternalSettings::ButtonVeryLarge: return baseSize*3.5;
-        // }
-
     }
 
     //________________________________________________________________
