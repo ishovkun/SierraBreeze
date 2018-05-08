@@ -351,7 +351,7 @@ namespace SierraBreeze
     }
 
     //________________________________________________________________
-    void Decoration::createButtons()
+void Decoration::createButtons()
     {
         m_leftButtons = new KDecoration2::DecorationButtonGroup(KDecoration2::DecorationButtonGroup::Position::Left, this, &Button::create);
         m_rightButtons = new KDecoration2::DecorationButtonGroup(KDecoration2::DecorationButtonGroup::Position::Right, this, &Button::create);
