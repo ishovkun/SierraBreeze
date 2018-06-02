@@ -16,6 +16,12 @@ sudo pacman -S kdecoration qt5-declarative qt5-x11extras    # Decoration
 sudo pacman -S cmake extra-cmake-modules                    # Installation
 ```
 
+### Fedora
+``` shell
+sudo dnf install cmake extra-cmake-modules  
+sudo dnf install "cmake(Qt5Core)" "cmake(Qt5Gui)" "cmake(Qt5DBus)" "cmake(Qt5X11Extras)" "cmake(KF5GuiAddons)" "cmake(KF5WindowSystem)" "cmake(KF5I18n)" "cmake(KDecoration2)" "cmake(KF5CoreAddons)" "cmake(KF5ConfigWidgets)"
+```
+
 ## Installation
 In order to install the theme and add it to your decorations do the following:
 ``` shell
