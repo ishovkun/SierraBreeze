@@ -197,7 +197,7 @@ namespace SierraBreeze
             QPen hint_pen(hover_hint_color);
             hint_pen.setCapStyle( Qt::RoundCap );
             hint_pen.setJoinStyle( Qt::MiterJoin );
-            hint_pen.setWidthF( 1.1*qMax((qreal)1.0, 20/width ) );
+            hint_pen.setWidthF( 1.5*qMax((qreal)1.0, 20/width ) );
 
             switch( type() )
             {
@@ -286,7 +286,8 @@ namespace SierraBreeze
                   if ( isHovered() )
                     {
                       painter->setPen( hint_pen );
-                      painter->drawLine( QPointF( 6, 9 ), QPointF( 12, 9 ) );
+                      // painter->drawLine( QPointF( 6, 9 ), QPointF( 12, 9 ) );
+                      painter->drawLine( QPointF( 5, 9 ), QPointF( 13, 9 ) );
                     }
                   painter->setPen( pen );
                     break;

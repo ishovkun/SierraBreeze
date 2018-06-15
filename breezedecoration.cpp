@@ -555,8 +555,8 @@ void Decoration::createButtons()
     //________________________________________________________________
     int Decoration::buttonHeight() const
     {
-        // const int modifier = m_internalSettings->buttonRadius();
         const int baseSize = settings()->gridUnit();
+        // const int modifier = m_internalSettings->buttonRadius();
         const int modifier = m_internalSettings->buttonSize();
         return baseSize + modifier;
     }
