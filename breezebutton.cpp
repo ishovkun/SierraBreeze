@@ -190,216 +190,113 @@ namespace SierraBreeze
 
             painter->setPen( pen );
             painter->setBrush( Qt::NoBrush );
-            auto d = qobject_cast<Decoration*>( decoration() );
-            auto c = d->client().data();
+            // auto d = qobject_cast<Decoration*>( decoration() );
+            // auto c = d->client().data();
 
             const auto hover_hint_color = QColor(41, 43, 50, 200);
             QPen hint_pen(hover_hint_color);
             hint_pen.setCapStyle( Qt::RoundCap );
             hint_pen.setJoinStyle( Qt::MiterJoin );
-            hint_pen.setWidthF( 1.1*qMax((qreal)1.0, 20/width ) );
+            hint_pen.setWidthF( 1.5*qMax((qreal)1.0, 20/width ) );
 
             switch( type() )
             {
 
                 case DecorationButtonType::Close:
                 {
-                  QColor button_color = QColor(242, 80, 86);
-                  if (!c->isActive())
-                    button_color = QColor(199, 199, 199);
-                  painter->setBrush( button_color );
-                  painter->setPen( Qt::NoPen );
-                  painter->drawEllipse( QRectF( 0, 0, 18, 18 ) );
-                  painter->setBrush( Qt::NoBrush );
-                  if ( isHovered() )
-                  {
-                    painter->setPen( hint_pen );
-                    // painter->setPen(pen);
-                    // it's a cross
                     painter->drawLine( QPointF( 6, 6 ), QPointF( 12, 12 ) );
-                    painter->drawLine( QPointF( 6, 12 ), QPointF( 12, 6 ) );
-                  }
-                  painter->setPen( pen );
-
-                  break;
+                    painter->drawLine( 12, 6, 6, 12 );
+                    break;
                 }
 
                 case DecorationButtonType::Maximize:
                 {
-                  QColor button_color = QColor(19, 209, 61);
-                  if (!c->isActive())
-                    button_color = QColor(199, 199, 199);
-
-                  painter->setBrush( button_color );
-                  painter->setPen( Qt::NoPen );
-                  // painter->drawEllipse( QRectF( 3, 3, 12, 12 ) );
-                  painter->drawEllipse( QRectF( 0, 0, 18, 18 ) );
-                  painter->setBrush( Qt::NoBrush );
-                  if ( isHovered() )
-                  {
-                    painter->setPen( hint_pen );
-                    // two triangles
-                    QPainterPath path1, path2;
-                    path1.moveTo(5, 13);
-                    path1.lineTo(11, 13);
-                    path1.lineTo(5, 7);
-
-                    path2.moveTo(13, 5);
-                    path2.lineTo(7, 5);
-                    path2.lineTo(13, 11);
-
-
-                    painter->fillPath(path1, QBrush(hover_hint_color));
-                    painter->fillPath(path2, QBrush(hover_hint_color));
-                  }
-                  painter->setPen( pen );
-                    // if( isChecked() )
-                    // {
-                    //     pen.setJoinStyle( Qt::RoundJoin );
-                    //     painter->setPen( pen );
-
-                    //     painter->drawPolygon( QPolygonF()
-                    //         << QPointF( 4, 9 )
-                    //         << QPointF( 9, 4 )
-                    //         << QPointF( 14, 9 )
-                    //         << QPointF( 9, 14 ) );
-
-                    // } else {
-                    //     painter->drawPolyline( QPolygonF()
-                    //         << QPointF( 4, 11 )
-                    //         << QPointF( 9, 6 )
-                    //         << QPointF( 14, 11 ) );
-                    // }
+                    if ( isChecked() )
+                    {
+                      painter->drawPolyline( QPolygonF()
+                          << QPointF( 5, 8 )
+                          << QPointF( 9, 12 )
+                          << QPointF( 13, 8 ) );
+                    } else {
+                      painter->drawPolyline( QPolygonF()
+                          << QPointF( 5, 10 )
+                          << QPointF( 9, 6 )
+                          << QPointF( 13, 10 ) );
+                    }
                     break;
                 }
 
                 case DecorationButtonType::Minimize:
                 {
-                  QColor button_color = QColor(252, 190, 7);
-                  if (!c->isActive())
-                    button_color = QColor(199, 199, 199);
-                  painter->setBrush( button_color );
-                  painter->setPen( Qt::NoPen );
-                  // painter->drawEllipse( QRectF( 3, 3, 12, 12 ) );
-                  painter->drawEllipse( QRectF( 0, 0, 18, 18 ) );
-                  painter->setBrush( Qt::NoBrush );
-                  if ( isHovered() )
-                    {
-                      painter->setPen( hint_pen );
-                      painter->drawLine( QPointF( 6, 9 ), QPointF( 12, 9 ) );
-                    }
-                  painter->setPen( pen );
+                    painter->drawLine( QLineF( 5, 9, 13, 9) );
                     break;
                 }
 
                 case DecorationButtonType::OnAllDesktops:
                 {
-                  QColor button_color = QColor(125, 209, 200);
-                  if (!c->isActive())
-                    button_color = QColor(199, 199, 199);
-                  painter->setBrush( button_color );
-                  painter->setPen( Qt::NoPen );
-                  painter->drawEllipse( QRectF( 0, 0, 18, 18 ) );
-                  if ( isHovered() || isChecked() )
-                  {
-                    painter->setBrush(QBrush(hover_hint_color));
-                    painter->drawEllipse( QRectF( 6, 6, 6, 6 ) );
-                  }
-                  painter->setPen( pen );
-                  painter->setBrush( Qt::NoBrush );
-                  break;
+                    if ( isChecked() || (isChecked() && isHovered()) )
+                    {
+                      painter->setPen( QColor(255, 255, 255, 220) );
+                      painter->drawEllipse(5, 5, 8, 8);
+                    }
+                    else if ( isHovered() )
+                    {
+                      painter->setPen( QColor(0, 0, 0, 100) );
+                      painter->drawEllipse(4, 4, 9, 9);
+                    }
+                    else
+                    {
+                      painter->setPen( QColor(0, 0, 0, 0) );
+                      painter->drawEllipse(4, 4, 9, 9);
+                    }
+                    break;
                 }
 
                 case DecorationButtonType::Shade:
                 {
-                  QColor button_color = QColor(135, 206, 249);
-                  if (!c->isActive())
-                    button_color = QColor(199, 199, 199);
-                  painter->setBrush( button_color );
-                  painter->setPen( Qt::NoPen );
-                  painter->setBrush( button_color );
-                  painter->drawEllipse( QRectF( 0, 0, 18, 18 ) );
-                  painter->setBrush( Qt::NoBrush );
                     if (isChecked())
                     {
-                        painter->setPen( hint_pen );
-                        painter->drawLine( 4, 5, 14, 5 );
+                        painter->drawLine( 5, 6, 13, 6 );
                         painter->drawPolyline( QPolygonF()
-                            << QPointF( 4, 8 )
+                            << QPointF( 5, 9 )
                             << QPointF( 9, 13 )
-                            << QPointF( 14, 8 ) );
-
-                    }
-                    else if (isHovered()) {
-                        painter->setPen( hint_pen );
-                        painter->drawLine( 4, 5, 14, 5 );
+                            << QPointF( 13, 9 ) );
+                    } else {
+                        painter->drawLine( 5, 6, 13, 6 );
                         painter->drawPolyline( QPolygonF()
-                            << QPointF( 4, 13 )
-                            << QPointF( 9, 8 )
-                            << QPointF( 14, 13 ) );
+                            << QPointF( 5, 13 )
+                            << QPointF( 9, 9 )
+                            << QPointF( 13, 13 ) );
                     }
-
                     break;
-
                 }
 
                 case DecorationButtonType::KeepBelow:
                 {
-                  QColor button_color = QColor(255, 137, 241);
-                  if (!c->isActive())
-                    button_color = QColor(199, 199, 199);
-                  painter->setBrush( button_color );
-                  painter->setPen( Qt::NoPen );
-                  painter->setBrush( button_color );
-                  painter->drawEllipse( QRectF( 0, 0, 18, 18 ) );
-                  painter->setBrush( Qt::NoBrush );
-                  if (isChecked() || isHovered())
-                  {
-                    painter->setPen( hint_pen );
                     painter->drawPolyline( QPolygonF()
-                                           << QPointF( 4, 5 )
-                                           << QPointF( 9, 10 )
-                                           << QPointF( 14, 5 ) );
+                        << QPointF( 5, 5 )
+                        << QPointF( 9, 9 )
+                        << QPointF( 13, 5 ) );
 
                     painter->drawPolyline( QPolygonF()
-                                           << QPointF( 4, 9 )
-                                           << QPointF( 9, 14 )
-                                           << QPointF( 14, 9 ) );
-                  }
-
+                        << QPointF( 5, 9 )
+                        << QPointF( 9, 13 )
+                        << QPointF( 13, 9 ) );
                     break;
 
                 }
 
                 case DecorationButtonType::KeepAbove:
                 {
-                  QColor button_color = QColor(204, 176, 213);
-                  if (!c->isActive())
-                    button_color = QColor(199, 199, 199);
-                  painter->setBrush( button_color );
-                  painter->setPen( Qt::NoPen );
-                  painter->drawEllipse( QRectF( 0, 0, 18, 18 ) );
-                  painter->setBrush( Qt::NoBrush );
-                  if ( isHovered() || isChecked())
-                  {
+                    painter->drawPolyline( QPolygonF()
+                        << QPointF( 5, 8 )
+                        << QPointF( 9, 4 )
+                        << QPointF( 13, 8 ) );
 
-                    painter->setPen( hint_pen );
-                    QPainterPath path;
-                    path.moveTo(9, 6);
-                    path.lineTo(5, 12);
-                    path.lineTo(13, 12);
-                    painter->fillPath(path, QBrush(hover_hint_color));
-                  }
-                  painter->setPen( pen );
-                    // painter->drawPolyline( QPolygonF()
-                    //     << QPointF( 4, 9 )
-                    //     << QPointF( 9, 4 )
-                    //     << QPointF( 14, 9 ) );
-
-                    // painter->drawPolyline( QPolygonF()
-                    //     << QPointF( 4, 13 )
-                    //     << QPointF( 9, 8 )
-                    //     << QPointF( 14, 13 ) );
+                    painter->drawPolyline( QPolygonF()
+                        << QPointF( 5, 12 )
+                        << QPointF( 9, 8 )
+                        << QPointF( 13, 12 ) );
                     break;
                 }
 
@@ -419,9 +316,7 @@ namespace SierraBreeze
                     path.arcTo( QRectF( 5, 3.5, 8, 5 ), 180, -180 );
                     path.cubicTo( QPointF(12.5, 9.5), QPointF( 9, 7.5 ), QPointF( 9, 11.5 ) );
                     painter->drawPath( path );
-
                     painter->drawPoint( 9, 15 );
-
                     break;
                 }
 
@@ -434,7 +329,7 @@ namespace SierraBreeze
     }
 
     //__________________________________________________________________
-    QColor Button::foregroundColor( void ) const
+    QColor Button::foregroundColor() const
     {
         auto d = qobject_cast<Decoration*>( decoration() );
         if( !d ) {
@@ -443,89 +338,152 @@ namespace SierraBreeze
 
         } else if( isPressed() ) {
 
-            return d->titleBarColor();
+            return QColor(0, 0, 0, 100);
 
-        } else if( type() == DecorationButtonType::Close && d->internalSettings()->outlineCloseButton() ) {
+        } else if( ( type() == DecorationButtonType::KeepBelow || type() == DecorationButtonType::KeepAbove || type() == DecorationButtonType::OnAllDesktops ) && isChecked() ) {
 
-            return d->titleBarColor();
-
-        } else if( ( type() == DecorationButtonType::KeepBelow || type() == DecorationButtonType::KeepAbove ) && isChecked() ) {
-
-            return d->titleBarColor();
+            return QColor(255, 255, 255, 150);
 
         } else if( m_animation->state() == QPropertyAnimation::Running ) {
 
-            return KColorUtils::mix( d->fontColor(), d->titleBarColor(), m_opacity );
+            return KColorUtils::mix( QColor(0, 0, 0, 0), QColor(0, 0, 0, 100) );
 
         } else if( isHovered() ) {
 
-            return d->titleBarColor();
+            return QColor(0, 0, 0, 80);
 
         } else {
 
-            return d->fontColor();
+            // By default black with no opacity
+            return QColor(0, 0, 0, 0);
 
         }
 
     }
 
     //__________________________________________________________________
-    QColor Button::backgroundColor( void ) const
+    QColor Button::backgroundColor() const
     {
         auto d = qobject_cast<Decoration*>( decoration() );
         if( !d ) {
-
             return QColor();
-
         }
 
-        auto c = d->client().data();
+        // The colors are hard coded into the following  if (type()== x)
+        // Ideally they should be defined as reusable variables somewhere
+        // and modified with QColor::lighter() or QColor::darker()
+
+        // Close button
+        // red base    QColor(220, 100, 60)
+
+        // Maximize button
+        // green base  QColor(110, 180, 50)
+
+        // Minimize button
+        // yellow base QColor(250, 190, 10)
+
+        // On all desktops button
+        // teal base   QColor(125, 210, 200)
+
+        // Shade button
+        // brown base  QColor(180, 140, 90)
+
+        // Keep above button
+        // pink base   QColor(255, 140, 240)
+
+        // Keep below button
+        // pink base   QColor(200, 140, 190)
+
+
+        // auto c = d->client().data();
         if( isPressed() ) {
 
-            if( type() == DecorationButtonType::Close ) return c->color( ColorGroup::Warning, ColorRole::Foreground );
-            else return KColorUtils::mix( d->titleBarColor(), d->fontColor(), 0.3 );
+            // close button pressed color
+            if( type() == DecorationButtonType::Close ) return QColor(220, 100, 60).darker(120);
+            // maximize button pressed color
+            else if( type() == DecorationButtonType::Maximize ) return QColor(110, 180, 50).darker(120);
+            // minimize button pressed color
+            else if( type() == DecorationButtonType::Minimize ) return QColor(250, 190, 10).darker(120);
+            // on all desktopts button pressed color
+            else if( type() == DecorationButtonType::OnAllDesktops ) return QColor(125, 210, 200).darker(120);
+            // shade button pressed color
+            else if( type() == DecorationButtonType::Shade ) return QColor(180, 140, 90).darker(120);
+            // keep below button pressed color
+            else if( type() == DecorationButtonType::KeepBelow ) return QColor(200, 140, 190).darker(120);
+            // keep above button pressed color
+            else if( type() == DecorationButtonType::KeepAbove ) return QColor(255, 140, 240).darker(120);
+            // any other button pressed gets its color from theme
+            else return d->fontColor();
 
+        // background color when keep below or above are checked
         } else if( ( type() == DecorationButtonType::KeepBelow || type() == DecorationButtonType::KeepAbove ) && isChecked() ) {
 
-            return d->fontColor();
+            if( type() == DecorationButtonType::KeepBelow ) return QColor(200, 140, 190).lighter(120);
+            else return QColor(255, 140, 240).lighter(120);
 
-        } else if( m_animation->state() == QPropertyAnimation::Running ) {
+        // animate background color
+        // } else if( m_animation->state() == QPropertyAnimation::Running ) {
 
-            if( type() == DecorationButtonType::Close )
-            {
-                if( d->internalSettings()->outlineCloseButton() )
-                {
+        //     if( type() == DecorationButtonType::Close )
+        //     {
+        //         if( d->internalSettings()->outlineCloseButton() )
+        //         {
 
-                    return KColorUtils::mix( d->fontColor(), c->color( ColorGroup::Warning, ColorRole::Foreground ).lighter(), m_opacity );
+        //             return KColorUtils::mix( d->fontColor(), c->color( ColorGroup::Warning, ColorRole::Foreground ).lighter(), m_opacity );
 
-                } else {
+        //         } else {
 
-                    QColor color( c->color( ColorGroup::Warning, ColorRole::Foreground ).lighter() );
-                    color.setAlpha( color.alpha()*m_opacity );
-                    return color;
+        //             QColor color( c->color( ColorGroup::Warning, ColorRole::Foreground ).lighter() );
+        //             color.setAlpha( color.alpha()*m_opacity );
+        //             return color;
 
-                }
+        //         }
 
-            } else {
+        //     } else {
 
-                QColor color( d->fontColor() );
-                color.setAlpha( color.alpha()*m_opacity );
-                return color;
+        //         QColor color( d->fontColor() );
+        //         color.setAlpha( color.alpha()*m_opacity );
+        //         return color;
 
-            }
+        //     }
 
         } else if( isHovered() ) {
 
-            if( type() == DecorationButtonType::Close ) return c->color( ColorGroup::Warning, ColorRole::Foreground ).lighter();
-            else return d->fontColor();
-
-        } else if( type() == DecorationButtonType::Close && d->internalSettings()->outlineCloseButton() ) {
-
-            return d->fontColor();
+            // close button hovered color
+            if( type() == DecorationButtonType::Close ) return QColor(220, 100, 60).lighter(130);
+            // maximize button hovered color
+            else if( type() == DecorationButtonType::Maximize ) return QColor(110, 180, 50).lighter(120);
+            // minimize button hovered color
+            else if( type() == DecorationButtonType::Minimize ) return QColor(250, 190, 10).lighter(140);
+            // on all desktopts button hovered color
+            else if( type() == DecorationButtonType::OnAllDesktops ) return QColor(125, 210, 200).lighter(110);
+            // shade button hovered color
+            else if( type() == DecorationButtonType::Shade ) return QColor(180, 140, 90).lighter(120);
+            // keep below button hovered color
+            else if( type() == DecorationButtonType::KeepBelow ) return QColor(200, 140, 190).lighter(120);
+            // keep above button hovered color
+            else if( type() == DecorationButtonType::KeepAbove ) return QColor(255, 140, 240).lighter(120);
+            // any other button gets theme colors mixed
+            else return KColorUtils::mix( d->titleBarColor(), d->fontColor(), 0.5 );
 
         } else {
 
-            return QColor();
+            // close button normal color
+            if( type() == DecorationButtonType::Close ) return QColor(220, 100, 60);
+            // maximize button normal color
+            else if( type() == DecorationButtonType::Maximize ) return QColor(110, 180, 50);
+            // minimize button normal color
+            else if( type() == DecorationButtonType::Minimize ) return QColor(250, 190, 10);
+            // on all desktopts button normal color
+            else if( type() == DecorationButtonType::OnAllDesktops ) return QColor(125, 210, 200);
+            // shade button normal color
+            else if( type() == DecorationButtonType::Shade ) return QColor(180, 140, 90);
+            // keep below button normal color
+            else if( type() == DecorationButtonType::KeepBelow ) return QColor(200, 140, 190);
+            // keep above button normal color
+            else if( type() == DecorationButtonType::KeepAbove ) return QColor(255, 140, 240);
+            // any other button without background color
+            else return QColor();
 
         }
 
