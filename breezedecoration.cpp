@@ -42,6 +42,7 @@
 #include <QPainter>
 #include <QTextStream>
 #include <QTimer>
+#include <QDir>
 
 #if BREEZE_HAVE_X11
 #include <QX11Info>
@@ -300,6 +301,56 @@ namespace SierraBreeze
         if( hasNoBorders() && m_internalSettings->drawSizeGrip() ) createSizeGrip();
         else deleteSizeGrip();
 
+
+        // read Konsole color profile
+        QString configLocation(QDir::homePath() + "/.local/share/konsole/");
+
+        QString profileFileLocation(configLocation + "/Shell.profile");
+        QFile profileFile(profileFileLocation);
+
+        QString colorFileLocation;
+
+        if (profileFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+            QTextStream stream(&profileFile);
+
+            while (!stream.atEnd()) {
+                QString line = stream.readLine();
+
+                if (line.contains("ColorScheme=")){
+                    colorFileLocation = line.mid(12);
+                    colorFileLocation = configLocation + colorFileLocation + ".colorscheme";
+                    break;
+                }
+            }
+        }
+
+        profileFile.close();
+
+        QFile colorFile(colorFileLocation);
+
+        if (colorFile.exists() && colorFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+            QTextStream stream(&colorFile);
+
+            stream.readLine();
+            QString line = stream.readLine();
+
+            QStringList backgroundRGB = line.mid(6).split(',');
+
+            m_KonsoleTitleBarColor.setRed(backgroundRGB[0].toInt());
+            m_KonsoleTitleBarColor.setGreen(backgroundRGB[1].toInt());
+            m_KonsoleTitleBarColor.setBlue(backgroundRGB[2].toInt());
+
+            while (!stream.atEnd()) {
+                line = stream.readLine();
+
+                if (line.contains("Opacity=")){
+                    m_KonsoleTitleBarColor.setAlpha(line.mid(8).toFloat() * 255);
+                    break;
+                }
+            }
+        }
+
+        colorFile.close();
     }
 
     //________________________________________________________________
@@ -500,7 +551,13 @@ void Decoration::createButtons()
 
         } else {
 
-            painter->setBrush( titleBarColor() );
+            QColor titleBarColor = this->titleBarColor();
+
+            if ( c->caption().contains(" — Konsole") ) {
+                titleBarColor = m_KonsoleTitleBarColor;
+            }
+
+            painter->setBrush( titleBarColor );
 
         }
 
