@@ -151,6 +151,8 @@ namespace SierraBreeze
         //* active state change opacity
         qreal m_opacity = 0;
 
+        QColor m_KonsoleTitleBarColor;
+
     };
 
     bool Decoration::hasBorders( void ) const
