@@ -283,6 +283,26 @@ namespace SierraBreeze
     }
 
     //________________________________________________________________
+    void Decoration::readKonsoleProfileColor()
+    {
+        // Konsole config profile path
+        const QString configLocation(QDir::homePath() + "/.local/share/konsole/");
+
+        const KConfig configProfile(configLocation + "/Shell.profile", KConfig::NoGlobals);
+
+        const QString colorFileLocation = configLocation + configProfile.group("Appearance").readEntry("ColorScheme", QString()) + ".colorscheme";
+
+        const KConfig configColor(colorFileLocation, KConfig::NoGlobals);
+        const QStringList backgroundRGB = configColor.group("Background").readEntry("Color").split(',');
+
+        m_KonsoleTitleBarColor.setRed(backgroundRGB[0].toInt());
+        m_KonsoleTitleBarColor.setGreen(backgroundRGB[1].toInt());
+        m_KonsoleTitleBarColor.setBlue(backgroundRGB[2].toInt());
+
+        m_KonsoleTitleBarColor.setAlpha(configColor.group("General").readEntry("Opacity").toFloat() * 255);
+    }
+
+    //________________________________________________________________
     void Decoration::reconfigure()
     {
 
@@ -297,60 +317,12 @@ namespace SierraBreeze
         // shadow
         createShadow();
 
+        // konsole title bar color and transparency
+        readKonsoleProfileColor();
+
         // size grip
         if( hasNoBorders() && m_internalSettings->drawSizeGrip() ) createSizeGrip();
         else deleteSizeGrip();
-
-
-        // read Konsole color profile
-        QString configLocation(QDir::homePath() + "/.local/share/konsole/");
-
-        QString profileFileLocation(configLocation + "/Shell.profile");
-        QFile profileFile(profileFileLocation);
-
-        QString colorFileLocation;
-
-        if (profileFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
-            QTextStream stream(&profileFile);
-
-            while (!stream.atEnd()) {
-                QString line = stream.readLine();
-
-                if (line.contains("ColorScheme=")){
-                    colorFileLocation = line.mid(12);
-                    colorFileLocation = configLocation + colorFileLocation + ".colorscheme";
-                    break;
-                }
-            }
-        }
-
-        profileFile.close();
-
-        QFile colorFile(colorFileLocation);
-
-        if (colorFile.exists() && colorFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
-            QTextStream stream(&colorFile);
-
-            stream.readLine();
-            QString line = stream.readLine();
-
-            QStringList backgroundRGB = line.mid(6).split(',');
-
-            m_KonsoleTitleBarColor.setRed(backgroundRGB[0].toInt());
-            m_KonsoleTitleBarColor.setGreen(backgroundRGB[1].toInt());
-            m_KonsoleTitleBarColor.setBlue(backgroundRGB[2].toInt());
-
-            while (!stream.atEnd()) {
-                line = stream.readLine();
-
-                if (line.contains("Opacity=")){
-                    m_KonsoleTitleBarColor.setAlpha(line.mid(8).toFloat() * 255);
-                    break;
-                }
-            }
-        }
-
-        colorFile.close();
     }
 
     //________________________________________________________________

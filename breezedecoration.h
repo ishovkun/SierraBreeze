@@ -119,6 +119,7 @@ namespace SierraBreeze
 
         void createButtons();
         void paintTitleBar(QPainter *painter, const QRect &repaintRegion);
+        void readKonsoleProfileColor();
         void createShadow();
 
         //*@name border size
