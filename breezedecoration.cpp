@@ -287,19 +287,37 @@ namespace SierraBreeze
     {
         // Konsole config profile path
         const QString configLocation(QDir::homePath() + "/.local/share/konsole/");
+        const QString shellProfileLocation(configLocation + "/Shell.profile");
 
-        const KConfig configProfile(configLocation + "/Shell.profile", KConfig::NoGlobals);
+        if (!QFile::exists(shellProfileLocation)) {
+            m_KonsoleTitleBarColorValid = false;
+            return;
+        }
+
+        const KConfig configProfile(shellProfileLocation, KConfig::NoGlobals);
 
         const QString colorFileLocation = configLocation + configProfile.group("Appearance").readEntry("ColorScheme", QString()) + ".colorscheme";
 
+        if (!QFile::exists(colorFileLocation)) {
+            m_KonsoleTitleBarColorValid = false;
+            return;
+        }
+
         const KConfig configColor(colorFileLocation, KConfig::NoGlobals);
         const QStringList backgroundRGB = configColor.group("Background").readEntry("Color").split(',');
+
+        if (backgroundRGB.size() != 3) {
+            m_KonsoleTitleBarColorValid = false;
+            return;
+        }
 
         m_KonsoleTitleBarColor.setRed(backgroundRGB[0].toInt());
         m_KonsoleTitleBarColor.setGreen(backgroundRGB[1].toInt());
         m_KonsoleTitleBarColor.setBlue(backgroundRGB[2].toInt());
 
         m_KonsoleTitleBarColor.setAlpha(configColor.group("General").readEntry("Opacity").toFloat() * 255);
+
+        m_KonsoleTitleBarColorValid = true;
     }
 
     //________________________________________________________________
@@ -525,7 +543,7 @@ void Decoration::createButtons()
 
             QColor titleBarColor = this->titleBarColor();
 
-            if ( c->caption().contains(" — Konsole") ) {
+            if ( c->caption().contains(" — Konsole") && m_KonsoleTitleBarColorValid ) {
                 titleBarColor = m_KonsoleTitleBarColor;
             }
 
