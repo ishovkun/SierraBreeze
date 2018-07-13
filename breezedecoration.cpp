@@ -42,6 +42,7 @@
 #include <QPainter>
 #include <QTextStream>
 #include <QTimer>
+#include <QDir>
 
 #if BREEZE_HAVE_X11
 #include <QX11Info>
@@ -282,6 +283,26 @@ namespace SierraBreeze
     }
 
     //________________________________________________________________
+    void Decoration::readKonsoleProfileColor()
+    {
+        // Konsole config profile path
+        const QString configLocation(QDir::homePath() + "/.local/share/konsole/");
+
+        const KConfig configProfile(configLocation + "/Shell.profile", KConfig::NoGlobals);
+
+        const QString colorFileLocation = configLocation + configProfile.group("Appearance").readEntry("ColorScheme", QString()) + ".colorscheme";
+
+        const KConfig configColor(colorFileLocation, KConfig::NoGlobals);
+        const QStringList backgroundRGB = configColor.group("Background").readEntry("Color").split(',');
+
+        m_KonsoleTitleBarColor.setRed(backgroundRGB[0].toInt());
+        m_KonsoleTitleBarColor.setGreen(backgroundRGB[1].toInt());
+        m_KonsoleTitleBarColor.setBlue(backgroundRGB[2].toInt());
+
+        m_KonsoleTitleBarColor.setAlpha(configColor.group("General").readEntry("Opacity").toFloat() * 255);
+    }
+
+    //________________________________________________________________
     void Decoration::reconfigure()
     {
 
@@ -296,10 +317,12 @@ namespace SierraBreeze
         // shadow
         createShadow();
 
+        // konsole title bar color and transparency
+        readKonsoleProfileColor();
+
         // size grip
         if( hasNoBorders() && m_internalSettings->drawSizeGrip() ) createSizeGrip();
         else deleteSizeGrip();
-
     }
 
     //________________________________________________________________
@@ -500,7 +523,13 @@ void Decoration::createButtons()
 
         } else {
 
-            painter->setBrush( titleBarColor() );
+            QColor titleBarColor = this->titleBarColor();
+
+            if ( c->caption().contains(" — Konsole") ) {
+                titleBarColor = m_KonsoleTitleBarColor;
+            }
+
+            painter->setBrush( titleBarColor );
 
         }
 
