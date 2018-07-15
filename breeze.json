@@ -62,7 +62,7 @@
         ]
     },
     "org.kde.kdecoration2": {
-        "blur": false,
+        "blur": true,
         "defaultTheme": "Breeze Sierra",
         "kcmodule": true
     }
