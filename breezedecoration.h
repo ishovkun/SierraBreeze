@@ -120,6 +120,7 @@ namespace SierraBreeze
         void createButtons();
         void paintTitleBar(QPainter *painter, const QRect &repaintRegion);
         void readKonsoleProfileColor();
+        bool isKonsoleWindow(QString caption);
         void createShadow();
 
         //*@name border size
@@ -153,6 +154,7 @@ namespace SierraBreeze
         qreal m_opacity = 0;
 
         QColor m_KonsoleTitleBarColor;
+        bool m_KonsoleTitleBarColorValid;
 
     };
 

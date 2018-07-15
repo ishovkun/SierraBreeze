@@ -285,21 +285,53 @@ namespace SierraBreeze
     //________________________________________________________________
     void Decoration::readKonsoleProfileColor()
     {
+        m_KonsoleTitleBarColorValid = false;
+
+        const KConfig konsoleConfig("konsolerc");
+        const QString defaultProfileFile = konsoleConfig.group("Desktop Entry").readEntry("DefaultProfile", QString());
+
         // Konsole config profile path
         const QString configLocation(QDir::homePath() + "/.local/share/konsole/");
+        const QString shellProfileLocation(configLocation + defaultProfileFile);
 
-        const KConfig configProfile(configLocation + "/Shell.profile", KConfig::NoGlobals);
+        if (!QFile::exists(shellProfileLocation)) {
+            return;
+        }
+
+        const KConfig configProfile(shellProfileLocation, KConfig::NoGlobals);
 
         const QString colorFileLocation = configLocation + configProfile.group("Appearance").readEntry("ColorScheme", QString()) + ".colorscheme";
 
+        if (!QFile::exists(colorFileLocation)) {
+            return;
+        }
+
         const KConfig configColor(colorFileLocation, KConfig::NoGlobals);
         const QStringList backgroundRGB = configColor.group("Background").readEntry("Color").split(',');
+
+        if (backgroundRGB.size() != 3) {
+            m_KonsoleTitleBarColorValid = false;
+            return;
+        }
 
         m_KonsoleTitleBarColor.setRed(backgroundRGB[0].toInt());
         m_KonsoleTitleBarColor.setGreen(backgroundRGB[1].toInt());
         m_KonsoleTitleBarColor.setBlue(backgroundRGB[2].toInt());
 
         m_KonsoleTitleBarColor.setAlpha(configColor.group("General").readEntry("Opacity").toFloat() * 255);
+
+        m_KonsoleTitleBarColorValid = true;
+    }
+
+    //________________________________________________________________
+    bool Decoration::isKonsoleWindow(QString caption)
+    {
+        if (caption.contains(" — Konsole") &&
+            caption.contains(":") &&
+            m_KonsoleTitleBarColorValid )
+                return true;
+
+        return false;
     }
 
     //________________________________________________________________
@@ -472,7 +504,12 @@ void Decoration::createButtons()
             painter->save();
             painter->setRenderHint(QPainter::Antialiasing);
             painter->setPen(Qt::NoPen);
-            painter->setBrush( c->color( c->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::Frame ) );
+
+            if ( isKonsoleWindow(c->caption()) ) {
+                painter->setBrush( m_KonsoleTitleBarColor );
+            } else {
+                painter->setBrush( c->color( c->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::Frame ) );
+            }
 
             // clip away the top part
             if( !hideTitleBar() ) painter->setClipRect(0, borderTop(), size().width(), size().height() - borderTop(), Qt::IntersectClip);
@@ -525,7 +562,7 @@ void Decoration::createButtons()
 
             QColor titleBarColor = this->titleBarColor();
 
-            if ( c->caption().contains(" — Konsole") ) {
+            if ( isKonsoleWindow(c->caption()) ) {
                 titleBarColor = m_KonsoleTitleBarColor;
             }
 
