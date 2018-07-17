@@ -154,6 +154,7 @@ namespace SierraBreeze
         qreal m_opacity = 0;
 
         QColor m_KonsoleTitleBarColor;
+        QColor m_KonsoleTitleBarTextColor;
         bool m_KonsoleTitleBarColorValid;
 
     };
