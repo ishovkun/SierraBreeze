@@ -310,7 +310,6 @@ namespace SierraBreeze
         const QStringList backgroundRGB = configColor.group("Background").readEntry("Color").split(',');
 
         if (backgroundRGB.size() != 3) {
-            m_KonsoleTitleBarColorValid = false;
             return;
         }
 
@@ -319,6 +318,17 @@ namespace SierraBreeze
         m_KonsoleTitleBarColor.setBlue(backgroundRGB[2].toInt());
 
         m_KonsoleTitleBarColor.setAlpha(configColor.group("General").readEntry("Opacity").toFloat() * 255);
+
+        // Text color
+        const QStringList foregroundRGB = configColor.group("Foreground").readEntry("Color").split(',');
+
+        if (foregroundRGB.size() != 3) {
+            return;
+        }
+
+        m_KonsoleTitleBarTextColor.setRed(foregroundRGB[0].toInt());
+        m_KonsoleTitleBarTextColor.setGreen(foregroundRGB[1].toInt());
+        m_KonsoleTitleBarTextColor.setBlue(foregroundRGB[2].toInt());
 
         m_KonsoleTitleBarColorValid = true;
     }
@@ -608,7 +618,12 @@ void Decoration::createButtons()
 
         // draw caption
         painter->setFont(s->font());
-        painter->setPen( fontColor() );
+        if ( isKonsoleWindow(c->caption()) ) {
+            painter->setPen( m_KonsoleTitleBarTextColor );
+        } else {
+            painter->setPen( fontColor() );
+        }
+
         const auto cR = captionRect();
         const QString caption = painter->fontMetrics().elidedText(c->caption(), Qt::ElideMiddle, cR.first.width());
         painter->drawText(cR.first, cR.second | Qt::TextSingleLine, caption);
