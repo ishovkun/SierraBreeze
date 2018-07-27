@@ -108,6 +108,11 @@ namespace SierraBreeze
     {
 
         auto c = client().data();
+        
+        if ( isKonsoleWindow(c->caption()) ) {
+            return m_KonsoleTitleBarColor;
+        }
+
         if( hideTitleBar() ) return c->color( ColorGroup::Inactive, ColorRole::TitleBar );
         else if( m_animation->state() == QPropertyAnimation::Running )
         {
@@ -141,12 +146,25 @@ namespace SierraBreeze
         auto c = client().data();
         if( m_animation->state() == QPropertyAnimation::Running )
         {
-            return KColorUtils::mix(
-                c->color( ColorGroup::Inactive, ColorRole::Foreground ),
-                c->color( ColorGroup::Active, ColorRole::Foreground ),
-                m_opacity );
-        } else return  c->color( c->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::Foreground );
-
+            if ( isKonsoleWindow(c->caption()) ) {
+                return KColorUtils::mix(
+                        m_KonsoleTitleBarTextColorInactive,
+                        m_KonsoleTitleBarTextColorActive,
+                        m_opacity );
+            }
+            else {
+                return KColorUtils::mix(
+                        c->color( ColorGroup::Inactive, ColorRole::Foreground ),
+                        c->color( ColorGroup::Active, ColorRole::Foreground ),
+                        m_opacity );
+            }
+        } else {
+            if ( isKonsoleWindow(c->caption()) ) {
+                return  c->isActive() ? m_KonsoleTitleBarTextColorActive : m_KonsoleTitleBarTextColorInactive;
+            } else {
+                return  c->color( c->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::Foreground );
+            }
+        }
     }
 
     //________________________________________________________________
@@ -326,15 +344,18 @@ namespace SierraBreeze
             return;
         }
 
-        m_KonsoleTitleBarTextColor.setRed(foregroundRGB[0].toInt());
-        m_KonsoleTitleBarTextColor.setGreen(foregroundRGB[1].toInt());
-        m_KonsoleTitleBarTextColor.setBlue(foregroundRGB[2].toInt());
+        m_KonsoleTitleBarTextColorActive.setRed(foregroundRGB[0].toInt());
+        m_KonsoleTitleBarTextColorActive.setGreen(foregroundRGB[1].toInt());
+        m_KonsoleTitleBarTextColorActive.setBlue(foregroundRGB[2].toInt());
+
+        m_KonsoleTitleBarTextColorInactive = m_KonsoleTitleBarTextColorActive;
+        m_KonsoleTitleBarTextColorInactive.setAlphaF(0.5);
 
         m_KonsoleTitleBarColorValid = true;
     }
 
     //________________________________________________________________
-    bool Decoration::isKonsoleWindow(QString caption)
+    bool Decoration::isKonsoleWindow(QString caption) const
     {
         if (caption.contains(" — Konsole") &&
             caption.contains(":") &&
@@ -559,7 +580,7 @@ void Decoration::createButtons()
         painter->setPen(Qt::NoPen);
 
         // render a linear gradient on title area
-        if( c->isActive() && m_internalSettings->drawBackgroundGradient() )
+        if ( c->isActive() && m_internalSettings->drawBackgroundGradient() && !isKonsoleWindow(c->caption()) )
         {
 
             const QColor titleBarColor( this->titleBarColor() );
@@ -571,11 +592,6 @@ void Decoration::createButtons()
         } else {
 
             QColor titleBarColor = this->titleBarColor();
-
-            if ( isKonsoleWindow(c->caption()) ) {
-                titleBarColor = m_KonsoleTitleBarColor;
-            }
-
             painter->setBrush( titleBarColor );
 
         }
@@ -618,11 +634,7 @@ void Decoration::createButtons()
 
         // draw caption
         painter->setFont(s->font());
-        if ( isKonsoleWindow(c->caption()) ) {
-            painter->setPen( m_KonsoleTitleBarTextColor );
-        } else {
-            painter->setPen( fontColor() );
-        }
+        painter->setPen( fontColor() );
 
         const auto cR = captionRect();
         const QString caption = painter->fontMetrics().elidedText(c->caption(), Qt::ElideMiddle, cR.first.width());
