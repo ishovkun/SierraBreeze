@@ -336,12 +336,7 @@ namespace SierraBreeze
     //________________________________________________________________
     bool Decoration::isKonsoleWindow(QString caption)
     {
-        if (caption.contains(" — Konsole") &&
-            caption.contains(":") &&
-            m_KonsoleTitleBarColorValid )
-                return true;
-
-        return false;
+        return caption.mid(caption.lastIndexOf(" — ")).startsWith(" — Konsole") && m_KonsoleTitleBarColorValid;
     }
 
     //________________________________________________________________
