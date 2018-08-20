@@ -38,6 +38,7 @@
 #include <KColorUtils>
 #include <KSharedConfig>
 #include <KPluginFactory>
+#include <KWindowInfo>
 
 #include <QPainter>
 #include <QTextStream>
@@ -108,8 +109,8 @@ namespace SierraBreeze
     {
 
         auto c = client().data();
-        
-        if ( isKonsoleWindow(c->caption()) ) {
+
+        if ( isKonsoleWindow(c) ) {
             return m_KonsoleTitleBarColor;
         }
 
@@ -146,7 +147,7 @@ namespace SierraBreeze
         auto c = client().data();
         if( m_animation->state() == QPropertyAnimation::Running )
         {
-            if ( isKonsoleWindow(c->caption()) ) {
+            if ( isKonsoleWindow(c) ) {
                 return KColorUtils::mix(
                         m_KonsoleTitleBarTextColorInactive,
                         m_KonsoleTitleBarTextColorActive,
@@ -159,7 +160,7 @@ namespace SierraBreeze
                         m_opacity );
             }
         } else {
-            if ( isKonsoleWindow(c->caption()) ) {
+            if ( isKonsoleWindow(c) ) {
                 return  c->isActive() ? m_KonsoleTitleBarTextColorActive : m_KonsoleTitleBarTextColorInactive;
             } else {
                 return  c->color( c->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::Foreground );
@@ -355,14 +356,17 @@ namespace SierraBreeze
     }
 
     //________________________________________________________________
-    bool Decoration::isKonsoleWindow(QString caption) const
+    bool Decoration::isKonsoleWindow(KDecoration2::DecoratedClient *dc) const
     {
-        if (caption.contains(" — Konsole") &&
-            caption.contains(":") &&
-            m_KonsoleTitleBarColorValid )
-                return true;
+        if (!m_KonsoleTitleBarColorValid) {
+          return false;
+        }
 
-        return false;
+        KWindowInfo info(dc->windowId(), 0, NET::WM2WindowClass | NET::WM2WindowRole);
+
+        return info.valid() &&
+          info.windowClassClass() == QByteArray("konsole") &&
+          info.windowRole().startsWith("MainWindow");
     }
 
     //________________________________________________________________
@@ -536,7 +540,7 @@ void Decoration::createButtons()
             painter->setRenderHint(QPainter::Antialiasing);
             painter->setPen(Qt::NoPen);
 
-            if ( isKonsoleWindow(c->caption()) ) {
+            if ( isKonsoleWindow(c) ) {
                 painter->setBrush( m_KonsoleTitleBarColor );
             } else {
                 painter->setBrush( c->color( c->isActive() ? ColorGroup::Active : ColorGroup::Inactive, ColorRole::Frame ) );
@@ -580,7 +584,7 @@ void Decoration::createButtons()
         painter->setPen(Qt::NoPen);
 
         // render a linear gradient on title area
-        if ( c->isActive() && m_internalSettings->drawBackgroundGradient() && !isKonsoleWindow(c->caption()) )
+        if ( c->isActive() && m_internalSettings->drawBackgroundGradient() && !isKonsoleWindow(c) )
         {
 
             const QColor titleBarColor( this->titleBarColor() );

@@ -120,7 +120,7 @@ namespace SierraBreeze
         void createButtons();
         void paintTitleBar(QPainter *painter, const QRect &repaintRegion);
         void readKonsoleProfileColor();
-        bool isKonsoleWindow(QString caption) const;
+        bool isKonsoleWindow(KDecoration2::DecoratedClient *dc) const;
         void createShadow();
 
         //*@name border size
