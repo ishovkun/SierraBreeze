@@ -32,6 +32,7 @@
 #include <QPalette>
 #include <QPropertyAnimation>
 #include <QVariant>
+#include <QPainter>
 
 namespace KDecoration2
 {
@@ -158,6 +159,10 @@ namespace SierraBreeze
         QColor m_KonsoleTitleBarTextColorActive;
         QColor m_KonsoleTitleBarTextColorInactive;
         bool m_KonsoleTitleBarColorValid;
+
+        //TODO Review this
+        QPainter painter;
+        const QRect repaintRegion;
 
     };
 

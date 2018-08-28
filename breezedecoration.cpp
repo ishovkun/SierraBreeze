@@ -204,12 +204,12 @@ namespace SierraBreeze
         connect(c, &KDecoration2::DecoratedClient::maximizedVerticallyChanged, this, &Decoration::recalculateBorders);
         connect(c, &KDecoration2::DecoratedClient::shadedChanged, this, &Decoration::recalculateBorders);
         connect(c, &KDecoration2::DecoratedClient::captionChanged, this,
-            [this]()
-            {
+           [this]()
+           {
                 // update the caption area
                 update(titleBar());
-            }
-        );
+           }
+       );
 
         connect(c, &KDecoration2::DecoratedClient::activeChanged, this, &Decoration::updateAnimationState);
         connect(c, &KDecoration2::DecoratedClient::widthChanged, this, &Decoration::updateTitleBar);
@@ -220,6 +220,12 @@ namespace SierraBreeze
         connect(c, &KDecoration2::DecoratedClient::maximizedChanged, this, &Decoration::updateButtonsGeometry);
         connect(c, &KDecoration2::DecoratedClient::adjacentScreenEdgesChanged, this, &Decoration::updateButtonsGeometry);
         connect(c, &KDecoration2::DecoratedClient::shadedChanged, this, &Decoration::updateButtonsGeometry);
+
+        connect(c, static_cast<void (KDecoration2::DecoratedClient::*)(const QPalette&)>(&KDecoration2::DecoratedClient::paletteChanged), this,
+                [this]
+        {
+            this->paintTitleBar(&painter, repaintRegion);
+        });
 
         createButtons();
         createShadow();
@@ -770,7 +776,9 @@ void Decoration::createButtons()
             radialGradient.setColorAt(1, gradientStopColor( g_shadowColor, 0 ) );
 
             // fill
-            QPainter painter(&image);
+            painter.begin(&image);
+            //TODO review these
+            //QPainter painter(&image);
             painter.setRenderHint( QPainter::Antialiasing, true );
             painter.fillRect( image.rect(), radialGradient);
 
