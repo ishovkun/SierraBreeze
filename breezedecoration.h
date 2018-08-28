@@ -98,6 +98,7 @@ namespace SierraBreeze
         inline bool isBottomEdge( void ) const;
 
         inline bool hideTitleBar( void ) const;
+        inline bool matchColorForTitleBar( void ) const;
         //@}
 
         public Q_SLOTS:
@@ -202,6 +203,8 @@ namespace SierraBreeze
     bool Decoration::hideTitleBar( void ) const
     { return m_internalSettings->hideTitleBar() && !client().data()->isShaded(); }
 
+    bool Decoration::matchColorForTitleBar( void ) const
+    { return m_internalSettings->matchColorForTitleBar(); }
 }
 
 #endif

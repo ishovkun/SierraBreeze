@@ -576,6 +576,8 @@ void Decoration::createButtons()
     void Decoration::paintTitleBar(QPainter *painter, const QRect &repaintRegion)
     {
         const auto c = client().data();
+        // TODO Review this. Here the window color is appended in matchedTitleBarColor var
+        const QColor matchedTitleBarColor(c->palette().color(QPalette::Window));
         const QRect titleRect(QPoint(0, 0), QSize(size().width(), borderTop()));
 
         if ( !titleRect.intersects(repaintRegion) ) return;
@@ -587,11 +589,20 @@ void Decoration::createButtons()
         if ( c->isActive() && m_internalSettings->drawBackgroundGradient() && !isKonsoleWindow(c) )
         {
 
-            const QColor titleBarColor( this->titleBarColor() );
+            // TODO Review this. Initialize titleBarColor based on user's choise.
+            const QColor titleBarColor = (matchColorForTitleBar()  ? matchedTitleBarColor : this->titleBarColor() );
             QLinearGradient gradient( 0, 0, 0, titleRect.height() );
             gradient.setColorAt(0.0, titleBarColor.lighter( 120 ) );
             gradient.setColorAt(0.8, titleBarColor);
             painter->setBrush(gradient);
+
+        } else if ( !isKonsoleWindow(c) ) {
+
+            // TODO Review this. Initialize titleBarColor based on user's choise.
+            // I needed another else if because the window might not be active or has drawBackgroundGradient but
+            // I still need to take care the konsole case.
+            const QColor titleBarColor = (matchColorForTitleBar()  ? matchedTitleBarColor : this->titleBarColor() );
+            painter->setBrush(titleBarColor);
 
         } else {
 
