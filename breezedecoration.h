@@ -32,6 +32,7 @@
 #include <QPalette>
 #include <QPropertyAnimation>
 #include <QVariant>
+#include <QPainter>
 
 namespace KDecoration2
 {
@@ -98,6 +99,7 @@ namespace SierraBreeze
         inline bool isBottomEdge( void ) const;
 
         inline bool hideTitleBar( void ) const;
+        inline bool matchColorForTitleBar( void ) const;
         //@}
 
         public Q_SLOTS:
@@ -158,6 +160,10 @@ namespace SierraBreeze
         QColor m_KonsoleTitleBarTextColorInactive;
         bool m_KonsoleTitleBarColorValid;
 
+        //TODO Review this
+        QPainter painter;
+        const QRect repaintRegion;
+
     };
 
     bool Decoration::hasBorders( void ) const
@@ -202,6 +208,8 @@ namespace SierraBreeze
     bool Decoration::hideTitleBar( void ) const
     { return m_internalSettings->hideTitleBar() && !client().data()->isShaded(); }
 
+    bool Decoration::matchColorForTitleBar( void ) const
+    { return m_internalSettings->matchColorForTitleBar(); }
 }
 
 #endif

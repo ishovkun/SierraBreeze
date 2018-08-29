@@ -53,6 +53,7 @@ namespace SierraBreeze
         connect( m_ui.drawSizeGrip, SIGNAL(clicked()), SLOT(updateChanged()) );
         connect( m_ui.drawBackgroundGradient, SIGNAL(clicked()), SLOT(updateChanged()) );
         connect( m_ui.drawTitleBarSeparator, SIGNAL(clicked()), SLOT(updateChanged()) );
+        connect( m_ui.matchColorForTitleBar, SIGNAL(clicked()), SLOT(updateChanged()) );
 
         connect( m_ui.buttonSize, SIGNAL(valueChanged(int)), SLOT(updateChanged()) );
         connect( m_ui.buttonSpacing, SIGNAL(valueChanged(int)), SLOT(updateChanged()) );
@@ -94,6 +95,7 @@ namespace SierraBreeze
         m_ui.buttonSize->setValue( m_internalSettings->buttonSize() );
         m_ui.buttonSpacing->setValue( m_internalSettings->buttonSpacing() );
         m_ui.buttonHPadding->setValue( m_internalSettings->buttonHPadding() );
+        m_ui.matchColorForTitleBar->setChecked( m_internalSettings->matchColorForTitleBar() );
 
         // load shadows
         m_ui.shadowSize->setValue( m_internalSettings->shadowSize() );
@@ -126,6 +128,7 @@ namespace SierraBreeze
         m_internalSettings->setAnimationsEnabled( m_ui.animationsEnabled->isChecked() );
         m_internalSettings->setAnimationsDuration( m_ui.animationsDuration->value() );
         m_internalSettings->setDrawTitleBarSeparator(m_ui.drawTitleBarSeparator->isChecked());
+        m_internalSettings->setMatchColorForTitleBar( m_ui.matchColorForTitleBar->isChecked() );
 
         m_internalSettings->setButtonSize( m_ui.buttonSize->value() );
         m_internalSettings->setButtonSpacing( m_ui.buttonSpacing->value() );
@@ -185,6 +188,7 @@ namespace SierraBreeze
         m_ui.shadowSize->setValue( m_internalSettings->shadowSize() );
         m_ui.shadowStrength->setValue( qRound(qreal(m_internalSettings->shadowStrength()*100)/255 ) );
         m_ui.shadowColor->setColor( m_internalSettings->shadowColor() );
+        m_ui.matchColorForTitleBar->setChecked( m_internalSettings->matchColorForTitleBar() );
 
     }
 
@@ -221,6 +225,9 @@ namespace SierraBreeze
         // exceptions
         else if( m_ui.exceptions->isChanged() ) modified = true;
 
+        // TODO Review this
+        // colors of title bar and window background
+        else if ( m_ui.matchColorForTitleBar->isChecked() != m_internalSettings->matchColorForTitleBar() ) modified = true;
         setChanged( modified );
 
     }
