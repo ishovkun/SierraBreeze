@@ -221,12 +221,6 @@ namespace SierraBreeze
         connect(c, &KDecoration2::DecoratedClient::adjacentScreenEdgesChanged, this, &Decoration::updateButtonsGeometry);
         connect(c, &KDecoration2::DecoratedClient::shadedChanged, this, &Decoration::updateButtonsGeometry);
 
-        connect(c, static_cast<void (KDecoration2::DecoratedClient::*)(const QPalette&)>(&KDecoration2::DecoratedClient::paletteChanged), this,
-                [this]
-        {
-            this->paintTitleBar(&painter, repaintRegion);
-        });
-
         createButtons();
         createShadow();
     }
