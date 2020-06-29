@@ -26,6 +26,7 @@
 #include <KColorUtils>
 
 #include <QPainter>
+#include <QPainterPath>
 
 namespace SierraBreeze
 {
